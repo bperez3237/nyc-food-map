@@ -32,7 +32,7 @@ This repository is an example of using React on the front end comminicating with
 
 
 1. `cd server` to get your terminal/cmd into the server directory.
-2. To run the server, create a virtual environment `virtualenv venv && source venv/bin/activate`, install packages `pip install -r requirements.txt` -- the requirements.txt file is inside the server subdirectory -- and do `python manage.py migrate && python manage.py runserver`.
+2. To run the server, create a virtual environment `virtualenv venv && source venv/bin/activate`, install packages `pip install -r requirements.txt` -- the requirements.txt file is inside the server subdirectory -- and do `python manage.py migrate && python manage.py runserver` or `python3 manage.py migrate && python3 manage.py runserver` for mac os using Python 3.
     - Again, make sure when you do this, you are inside the server directory on your terminal/cmd.
     - On Windows, you should do `venv\Scripts\activate` instead of `source venv/bin/activate`
 3. If you're writing for an example repository, please create

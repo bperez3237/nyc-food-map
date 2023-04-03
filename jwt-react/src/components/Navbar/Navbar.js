@@ -8,7 +8,7 @@ function Navbar() {
     <div className='Navbar'>
       <h4>App</h4>
       <Searchbar />
-      <Link to='/create-page'>Create New Page</Link>
+      {/* <Link to='/create-page'>Create New Page</Link> */}
     </div>
   )
 }
