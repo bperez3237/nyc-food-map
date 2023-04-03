@@ -1,0 +1,31 @@
+.Searchbar {
+    display: flex;
+    padding: 0 5px;
+    align-items: center;
+    height: 2rem;
+    width: 10rem;
+    margin-left: 30px;
+    background-color: var(--main-background-color-muted);
+    /* border: 1px solid var(--accent-text-color); */
+    border-radius: 3px;
+    color: var(--main-text-color);
+
+}   
+
+.Searchbar svg {
+    color: var(--accent-text-color)
+}
+
+.Searchbar input {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--main-text-color);
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+}
+
+.Searchbar input:focus {
+    outline: none;
+}
