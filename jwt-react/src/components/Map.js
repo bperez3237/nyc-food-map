@@ -1,31 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-class Map extends Component {
-  constructor(props) {
-    super(props);
+function Map({map, setMap}) {
+  const mapRef = useRef(null);
 
-    this.state = {
-      map: null
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const mapOptions = {
-      center: { lat: 40.7, lng: -74.0 },
-      zoom: 12
+      center: { lat: 40.7, lng: -73.9 },
+      zoom: 11.5
     };
-    const map = new window.google.maps.Map(this.mapNode, mapOptions);
-    this.setState({ map });
-  }
+    const mapInstance = new window.google.maps.Map(mapRef.current, mapOptions);
+    setMap(mapInstance);
+  }, []);
 
-  render() {
-    return (
-      <div
-        style={{ height: '800px', width: '100%' }}
-        ref={(mapNode) => { this.mapNode = mapNode; }}
-      />
-    );
-  }
+  return (
+    <div
+      style={{ height: '800px', width: '100%' }}
+      ref={mapRef}
+    />
+  );
 }
 
 export default Map;
+

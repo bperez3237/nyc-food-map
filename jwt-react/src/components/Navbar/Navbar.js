@@ -3,11 +3,11 @@ import Searchbar from '../Searchbar/Searchbar'
 import './Navbar.css'
 import {Link} from 'react-router-dom'
 
-function Navbar() {
+function Navbar({map}) {
   return (
     <div className='Navbar'>
       <h4>App</h4>
-      <Searchbar />
+      <Searchbar map={map} />
       {/* <Link to='/create-page'>Create New Page</Link> */}
     </div>
   )

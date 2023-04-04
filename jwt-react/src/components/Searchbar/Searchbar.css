@@ -28,3 +28,24 @@
 .Searchbar input:focus {
     outline: none;
 }
+
+.search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: transparent;
+    border-radius: 5px;
+
+    transform:rotate(45deg);
+    color: var(--accent-text-color);
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.search-button svg {
+
+    transform:rotate(-45deg);
+}
+

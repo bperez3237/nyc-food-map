@@ -13,12 +13,13 @@ import Navbar from '../Navbar/Navbar.js';
 
 
 function App() {
+  const [map, setMap] = useState(null);
   return (
     <div className="App">
-        <Navbar />
+        <Navbar map={map}/>
         <Switch>
           <Route exact path="/">
-            <HomePage/>
+            <HomePage map={map} setMap={setMap}/>
           </Route>
         </Switch>
     </div>

@@ -33,3 +33,6 @@ typings
 
 # API keys
 public/index.html
+
+# Environment variables
+.env
