@@ -5,7 +5,7 @@ import {BsArrow90DegRight} from 'react-icons/bs'
 
 function Searchbar({ map }) {
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [currentMarker, setCurrentMarker] = useState(null);
   const handleSearchSubmit = (event) => {
     event.preventDefault();
 
@@ -15,8 +15,11 @@ function Searchbar({ map }) {
     // Use the geocoder to get the geographic coordinates of the search query
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       if (status === 'OK') {
+        console.log('here', results)
         // Get the latitude and longitude of the first result
-        const { lat, lng } = results[0].geometry.location;
+        const lat = results[0].geometry.viewport.Va.hi;
+        const lng = results[0].geometry.viewport.Ga.hi;
+        console.log(lat,lng)
 
         // Create a new marker for the search result
         const marker = new window.google.maps.Marker({
@@ -25,6 +28,11 @@ function Searchbar({ map }) {
           title: results[0].formatted_address,
         });
 
+        if (currentMarker) {
+          currentMarker.setMap(null);
+        }
+
+        setCurrentMarker(marker);
         // Pan the map to the search result
         map.panTo({ lat, lng });
       } else {
