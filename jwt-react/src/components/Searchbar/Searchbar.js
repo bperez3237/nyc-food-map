@@ -6,20 +6,35 @@ import {BsArrow90DegRight} from 'react-icons/bs'
 function Searchbar({ map }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentMarker, setCurrentMarker] = useState(null);
+
+  function inNYC(address) {
+    return address.some(name => [
+      'Kings County',
+      'Manhattan',
+      'Queens County',
+      'Bronx County',
+      'Richmond County',
+    ].includes(name.long_name));
+  }
+
+
   const handleSearchSubmit = (event) => {
     event.preventDefault();
 
     // Create a new geocoder object
     const geocoder = new window.google.maps.Geocoder();
 
+    
+
     // Use the geocoder to get the geographic coordinates of the search query
     geocoder.geocode({ address: searchQuery }, (results, status) => {
-      if (status === 'OK') {
-        console.log('here', results)
+      const isInNyc = inNYC(results[0].address_components);
+      if (!isInNyc){ console.log('not in NYC'); return; } 
+
+      if (status === 'OK' && isInNyc) {
         // Get the latitude and longitude of the first result
         const lat = results[0].geometry.viewport.Va.hi;
         const lng = results[0].geometry.viewport.Ga.hi;
-        console.log(lat,lng)
 
         // Create a new marker for the search result
         const marker = new window.google.maps.Marker({
