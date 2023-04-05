@@ -23,9 +23,9 @@ function Searchbar({ map }) {
 
     // Create a new geocoder object
     const geocoder = new window.google.maps.Geocoder();
-
-    
-
+    if (!searchQuery) {
+      return
+    }
     // Use the geocoder to get the geographic coordinates of the search query
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       const isInNyc = inNYC(results[0].address_components);
