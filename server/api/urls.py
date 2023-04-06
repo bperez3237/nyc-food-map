@@ -21,10 +21,10 @@ from .views import (LocationIndexView, LocationShowView, LocationCreateView, Loc
 
 urlpatterns = [
     # Location URLs
-    path('', LocationIndexView.as_view(), name='index'),
-    path('<int:pk>/', LocationShowView.as_view(), name='show'),
-    path('create/', LocationCreateView.as_view(), name='create'),
-    path('<int:pk>/update/', LocationUpdateView.as_view(), name='update'),
+    path('', LocationIndexView.as_view(), name='location:index'),
+    path('<int:pk>/', LocationShowView.as_view(), name='location:show'),
+    path('create/', LocationCreateView.as_view(), name='location:create'),
+    path('<int:pk>/update/', LocationUpdateView.as_view(), name='location:update'),
     # Price URLs
     path('prices/', PriceIndexView.as_view(), name='price:index'),
     path('prices/create/', PriceCreateView.as_view(), name='price:create'),
