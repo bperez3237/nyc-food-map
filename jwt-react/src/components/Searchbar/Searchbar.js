@@ -33,8 +33,8 @@ function Searchbar({ map }) {
 
       if (status === 'OK' && isInNyc) {
         // Get the latitude and longitude of the first result
-        const lat = results[0].geometry.viewport.Va.hi;
-        const lng = results[0].geometry.viewport.Ga.hi;
+        const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
+        const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
 
         // Create a new marker for the search result
         const marker = new window.google.maps.Marker({
