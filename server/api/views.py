@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
-from .models import Location
+from .models import Location, Price, Food
 
 class LocationIndexView(ListView):
     model = Location
@@ -43,3 +43,36 @@ class LocationUpdateView(UpdateView):
         obj.average_price = obj.foods.aggregate(models.Avg('prices__value'))['prices__value__avg']
         return obj
 
+
+class PriceIndexView(ListView):
+    model = Price
+    template_name = 'price/index.html'
+    context_object_name = 'prices'
+
+class PriceShowView(DetailView):
+    model = Price
+    template_name = 'price/show.html'
+    context_object_name = 'price'
+
+class PriceCreateView(CreateView):
+    model = Price
+    template_name = 'price/create.html'
+    fields = ['value', 'food']
+    success_url = reverse_lazy('price:index')
+
+
+class FoodIndexView(ListView):
+    model = Food
+    template_name = 'food/index.html'
+    context_object_name = 'foods'
+
+class FoodShowView(DetailView):
+    model = Food
+    template_name = 'food/show.html'
+    context_object_name = 'food'
+
+class FoodCreateView(CreateView):
+    model = Food
+    template_name = 'food/create.html'
+    fields = ['name']
+    success_url = reverse_lazy('food:index')
