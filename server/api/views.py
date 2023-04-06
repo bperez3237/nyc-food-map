@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.db import models
 from .models import Location, Price, Food
 
 class LocationIndexView(ListView):

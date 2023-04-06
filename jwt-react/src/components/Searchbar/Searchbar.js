@@ -28,10 +28,8 @@ function Searchbar({ map }) {
     }
     // Use the geocoder to get the geographic coordinates of the search query
     geocoder.geocode({ address: searchQuery }, (results, status) => {
-      const isInNyc = inNYC(results[0].address_components);
-      if (!isInNyc){ console.log('not in NYC'); return; } 
 
-      if (status === 'OK' && isInNyc) {
+      if (status === 'OK' && inNYC(results[0].address_components)) {
         // Get the latitude and longitude of the first result
         const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
         const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
