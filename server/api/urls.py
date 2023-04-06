@@ -29,12 +29,10 @@ urlpatterns = [
     path('prices/', PriceIndexView.as_view(), name='price:index'),
     path('prices/create/', PriceCreateView.as_view(), name='price:create'),
     path('prices/<int:pk>/', PriceShowView.as_view(), name='price:show'),
-    path('prices/<int:pk>/update/', PriceUpdateView.as_view(), name='price:update'),
     
     # Food URLs
     path('foods/', FoodIndexView.as_view(), name='food:index'),
     path('foods/create/', FoodCreateView.as_view(), name='food:create'),
     path('foods/<int:pk>/', FoodShowView.as_view(), name='food:show'),
-    path('foods/<int:pk>/update/', FoodUpdateView.as_view(), name='food:update'),
 ]
 
