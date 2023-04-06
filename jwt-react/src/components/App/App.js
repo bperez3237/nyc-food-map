@@ -10,6 +10,7 @@ import {
   useParams
 } from "react-router-dom";
 import Navbar from '../Navbar/Navbar.js';
+import CreatePage from '../../pages/CreatePage';
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage map={map} setMap={setMap}/>
+          </Route>
+          <Route path="/create-page">
+            <CreatePage map={map}/>
           </Route>
         </Switch>
     </div>

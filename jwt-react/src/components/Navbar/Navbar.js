@@ -8,7 +8,7 @@ function Navbar({map}) {
     <div className='Navbar'>
       <h4>App</h4>
       <Searchbar map={map} />
-      {/* <Link to='/create-page'>Create New Page</Link> */}
+      <Link to='/create-page'>Create New Page</Link>
     </div>
   )
 }
