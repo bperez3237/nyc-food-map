@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class Location(models.Model):
-    value = models.FloatField()
+    address = models.CharField(max_length=255)
     entry_date = models.DateField()
 
 class Price(models.Model):

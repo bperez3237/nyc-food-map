@@ -21,18 +21,18 @@ from .views import (LocationIndexView, LocationShowView, LocationCreateView, Loc
 
 urlpatterns = [
     # Location URLs
-    path('', LocationIndexView.as_view(), name='location:index'),
-    path('<int:pk>/', LocationShowView.as_view(), name='location:show'),
-    path('create/', LocationCreateView.as_view(), name='location:create'),
-    path('<int:pk>/update/', LocationUpdateView.as_view(), name='location:update'),
+    path('', LocationIndexView.as_view(), name='location_index'),
+    path('<int:pk>/', LocationShowView.as_view(), name='location_show'),
+    path('create/', LocationCreateView.as_view(), name='location_create'),
+    path('<int:pk>/update/', LocationUpdateView.as_view(), name='location_update'),
     # Price URLs
-    path('prices/', PriceIndexView.as_view(), name='price:index'),
-    path('prices/create/', PriceCreateView.as_view(), name='price:create'),
-    path('prices/<int:pk>/', PriceShowView.as_view(), name='price:show'),
+    path('prices/', PriceIndexView.as_view(), name='price_index'),
+    path('prices/create/', PriceCreateView.as_view(), name='price_create'),
+    path('prices/<int:pk>/', PriceShowView.as_view(), name='price_show'),
     
     # Food URLs
-    path('foods/', FoodIndexView.as_view(), name='food:index'),
-    path('foods/create/', FoodCreateView.as_view(), name='food:create'),
-    path('foods/<int:pk>/', FoodShowView.as_view(), name='food:show'),
+    path('foods/', FoodIndexView.as_view(), name='food_index'),
+    path('foods/create/', FoodCreateView.as_view(), name='food_create'),
+    path('foods/<int:pk>/', FoodShowView.as_view(), name='food_show'),
 ]
 
