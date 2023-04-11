@@ -58,13 +58,13 @@ function CreatePage() {
             else {
                 const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
                 const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
-                postData(e, lat, lng)
+                postData(e, results[0].formatted_address, lat, lng)
             }
         });
     }
 
 
-    const postData = async (e, lat, lng) => {
+    const postData = async (e, formattedAddress, lat, lng) => {
         e.preventDefault()
 
         const response = await fetch('http://127.0.0.1:8000/locations/create/', {
@@ -74,7 +74,7 @@ function CreatePage() {
                 // 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({
-                address: address,
+                address: formattedAddress,
                 entry_date: new Date().toISOString().slice(0, 10),
                 lat: lat,
                 lng: lng,
