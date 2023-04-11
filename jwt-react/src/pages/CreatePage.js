@@ -7,7 +7,14 @@ import React, {useState, useEffect} from 'react'
 
 function CreatePage() {
     const [address, setAddress] = useState('')
+    const [locations, setLocations] = useState([])
     console.log(address)
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/locations/')
+        .then(res => res.json())
+        .then(data => setLocations(data))
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,6 +42,11 @@ function CreatePage() {
                 <input value={address} onChange={(e)=>setAddress(e.target.value)}/>
                 <button type='submit'>Submit</button>
             </form>
+            {locations?.map(location => (
+                <div key={location.id}>
+                    <p>{location.address}</p>
+                    </div>
+            ))}
         </div>
   )
 }

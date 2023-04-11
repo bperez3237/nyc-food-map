@@ -14,17 +14,15 @@ from .models import Location, Price, Food
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
+from django.core import serializers
 
 # @csrf_exempt
 class LocationIndexView(ListView):
     model = Location
-    template_name = 'location/index.html'
-    context_object_name = 'locations'
 
-class LocationShowView(DetailView):
-    model = Location
-    template_name = 'location/show.html'
-    context_object_name = 'location'
+    def get(self, request, *args, **kwargs):
+        locations = list(self.get_queryset().values())
+        return JsonResponse({'locations': locations})
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -39,17 +37,33 @@ class LocationCreateView(CreateView):
         location.save()
         return JsonResponse({'success': True})
 
+
+class LocationIndexView(ListView):
+    model = Location
+
+    def get(self, request, *args, **kwargs):
+        locations = list(self.get_queryset().values())
+        return JsonResponse({'locations': locations})
+
+
+class LocationShowView(DetailView):
+    model = Location
+
+    def get(self, request, *args, **kwargs):
+        location = self.get_object()
+        location_data = serializers.serialize('json', [location])
+        return JsonResponse({'location': location_data})
+
+
 class LocationUpdateView(UpdateView):
     model = Location
-    template_name = 'location/update.html'
-    fields = ['value', 'entry_date']
-    success_url = reverse_lazy('location:index')
-    
+    fields = ['address', 'entry_date']
+
     def form_valid(self, form):
         self.object = form.save()
         self.object.calculate_average_price() # update the average price of related foods
-        return super().form_valid(form)
-    
+        return JsonResponse({'location': serializers.serialize('json', [self.object])})
+
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         obj.average_price = obj.foods.aggregate(models.Avg('prices__value'))['prices__value__avg']
@@ -58,33 +72,60 @@ class LocationUpdateView(UpdateView):
 
 class PriceIndexView(ListView):
     model = Price
-    template_name = 'price/index.html'
-    context_object_name = 'prices'
+
+    def get(self, request, *args, **kwargs):
+        prices = list(self.get_queryset().values())
+        return JsonResponse({'prices': prices})
+
 
 class PriceShowView(DetailView):
     model = Price
-    template_name = 'price/show.html'
-    context_object_name = 'price'
+
+    def get(self, request, *args, **kwargs):
+        price = self.get_object()
+        price_data = serializers.serialize('json', [price])
+        return JsonResponse({'price': price_data})
+
 
 class PriceCreateView(CreateView):
     model = Price
-    template_name = 'price/create.html'
     fields = ['value', 'food']
-    success_url = reverse_lazy('price:index')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        food = self.object.food
+        food.average_price = food.prices.aggregate(models.Avg('value'))['value__avg']
+        food.save()
+        return JsonResponse({'price': serializers.serialize('json', [self.object])})
+
+    def get_success_url(self):
+        return reverse_lazy('price:index')
 
 
 class FoodIndexView(ListView):
     model = Food
-    template_name = 'food/index.html'
-    context_object_name = 'foods'
+
+    def get(self, request, *args, **kwargs):
+        foods = list(self.get_queryset().values())
+        return JsonResponse({'foods': foods})
+
 
 class FoodShowView(DetailView):
     model = Food
-    template_name = 'food/show.html'
-    context_object_name = 'food'
+
+    def get(self, request, *args, **kwargs):
+        food = self.get_object()
+        food_data = serializers.serialize('json', [food])
+        return JsonResponse({'food': food_data})
+
 
 class FoodCreateView(CreateView):
     model = Food
-    template_name = 'food/create.html'
     fields = ['name']
-    success_url = reverse_lazy('food:index')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return JsonResponse({'food': serializers.serialize('json', [self.object])})
+
+    def get_success_url(self):
+        return reverse_lazy('food:index')
