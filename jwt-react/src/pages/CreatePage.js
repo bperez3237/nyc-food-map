@@ -12,11 +12,54 @@ function CreatePage() {
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/locations/')
-        .then(res => res.json())
-        .then(data => setLocations(data))
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setLocations(data.locations)})
     }, [])
 
-    const handleSubmit = async (e) => {
+    const locationElements = locations ? locations.map(location => {
+        console.log(location)
+        return (
+            <div key={location.id}>
+                <h3>{location.address}</h3>
+                <p>{location.entry_date}</p>
+            </div>
+        )
+    }) : []
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault()
+
+        function inNYC(address) {
+            return address.some(name => [
+            'Kings County',
+            'Manhattan',
+            'Queens County',
+            'Bronx County',
+            'Richmond County',
+            ].includes(name.long_name));
+        }
+        const geocoder = new window.google.maps.Geocoder();
+        if (!address) {
+            return
+        }
+        geocoder.geocode({ address: address }, (results, status) => {
+            if (status !== 'OK') {
+                console.log('Geocode was not successful for the following reason:', status);
+            }
+            else if (!inNYC(results[0].address_components)) {
+                console.log('Address is not in NYC')
+            }
+            else {
+                postData(e)
+            }
+        });
+    }
+
+
+    const postData = async (e) => {
         e.preventDefault()
 
         const response = await fetch('http://127.0.0.1:8000/locations/create/', {
@@ -42,11 +85,7 @@ function CreatePage() {
                 <input value={address} onChange={(e)=>setAddress(e.target.value)}/>
                 <button type='submit'>Submit</button>
             </form>
-            {locations?.map(location => (
-                <div key={location.id}>
-                    <p>{location.address}</p>
-                    </div>
-            ))}
+            {locationElements}
         </div>
   )
 }
