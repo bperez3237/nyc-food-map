@@ -4,6 +4,7 @@ function Map({map, setMap}) {
   const mapRef = useRef(null);
 
   useEffect(() => {
+    
     const mapOptions = {
       center: { lat: 40.7, lng: -73.9 },
       zoom: 11.5
