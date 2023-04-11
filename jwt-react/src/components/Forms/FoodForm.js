@@ -11,7 +11,6 @@ function FoodForm() {
     }, [])
 
     const foodElements = foods ? foods.map(food => {
-        console.log(food)
         return (
             <div key={food.id}>
                 <h3>{food.name}</h3>
@@ -42,6 +41,7 @@ function FoodForm() {
         })
         const data = await response.json()
         console.log(data)
+        setName('')
     }
 
 
