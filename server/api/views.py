@@ -11,7 +11,11 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.db import models
 from .models import Location, Price, Food
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
 
+# @csrf_exempt
 class LocationIndexView(ListView):
     model = Location
     template_name = 'location/index.html'
@@ -22,11 +26,18 @@ class LocationShowView(DetailView):
     template_name = 'location/show.html'
     context_object_name = 'location'
 
+
+@method_decorator(csrf_exempt, name='dispatch')
 class LocationCreateView(CreateView):
     model = Location
-    template_name = 'location/create.html'
-    fields = ['value', 'entry_date']
+    fields = ['address', 'entry_date']
     success_url = reverse_lazy('location:index')
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        location = Location(address=data['address'], entry_date=data['entry_date'])
+        location.save()
+        return JsonResponse({'success': True})
 
 class LocationUpdateView(UpdateView):
     model = Location
