@@ -22,7 +22,6 @@ function LocationForm() {
     }) : []
 
     const handleSubmit = (e) => {
-
         e.preventDefault()
 
         function inNYC(address) {
@@ -55,7 +54,6 @@ function LocationForm() {
     }
 
     const postData = async (e, formattedAddress, lat, lng) => {
-        e.preventDefault()
 
         const response = await fetch('http://127.0.0.1:8000/locations/create/', {
             method: 'POST',
@@ -70,11 +68,13 @@ function LocationForm() {
             })
         })
         const data = await response.json()
+        console.log(data)
     }
 
 
     return (
-        <div>CreatePage
+        <div>
+            <h1>Create Location</h1>
             <form onSubmit={handleSubmit}>
                 <label>Address:</label>
                 <input value={address} onChange={(e)=>setAddress(e.target.value)}/>

@@ -118,14 +118,15 @@ class FoodShowView(DetailView):
         food_data = serializers.serialize('json', [food])
         return JsonResponse({'food': food_data})
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class FoodCreateView(CreateView):
     model = Food
     fields = ['name']
+    success_url = reverse_lazy('food:index')
 
-    def form_valid(self, form):
-        self.object = form.save()
-        return JsonResponse({'food': serializers.serialize('json', [self.object])})
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        food = Food(name=data['name'])
+        food.save()
+        return JsonResponse({'success': True})
 
-    def get_success_url(self):
-        return reverse_lazy('food:index')

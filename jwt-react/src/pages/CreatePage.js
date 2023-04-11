@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LocationForm from '../components/Forms/LocationForm'
+import FoodForm from '../components/Forms/FoodForm'
 
 function CreatePage() {
+    const [toggle, setToggle] = useState(false)
 
     return (
         <div>
-            <LocationForm />
+            <button onClick={()=>setToggle(!toggle)}>toggle form</button>
+            {toggle ? <LocationForm />:<FoodForm />}
         </div>
   )
 }
