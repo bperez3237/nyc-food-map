@@ -28,12 +28,12 @@ class LocationIndexView(ListView):
 @method_decorator(csrf_exempt, name='dispatch')
 class LocationCreateView(CreateView):
     model = Location
-    fields = ['address', 'entry_date']
+    fields = ['address', 'entry_date', 'lat', 'lng']
     success_url = reverse_lazy('location:index')
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        location = Location(address=data['address'], entry_date=data['entry_date'])
+        location = Location(address=data['address'], entry_date=data['entry_date'], lat=data['lat'], lng=data['lng'])
         location.save()
         return JsonResponse({'success': True})
 

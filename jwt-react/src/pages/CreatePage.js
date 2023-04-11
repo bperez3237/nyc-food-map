@@ -24,6 +24,8 @@ function CreatePage() {
             <div key={location.id}>
                 <h3>{location.address}</h3>
                 <p>{location.entry_date}</p>
+                <p>{location.lat}</p>
+                <p>{location.lng}</p>
             </div>
         )
     }) : []
@@ -46,6 +48,7 @@ function CreatePage() {
             return
         }
         geocoder.geocode({ address: address }, (results, status) => {
+ 
             if (status !== 'OK') {
                 console.log('Geocode was not successful for the following reason:', status);
             }
@@ -53,13 +56,15 @@ function CreatePage() {
                 console.log('Address is not in NYC')
             }
             else {
-                postData(e)
+                const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
+                const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
+                postData(e, lat, lng)
             }
         });
     }
 
 
-    const postData = async (e) => {
+    const postData = async (e, lat, lng) => {
         e.preventDefault()
 
         const response = await fetch('http://127.0.0.1:8000/locations/create/', {
@@ -70,7 +75,9 @@ function CreatePage() {
             },
             body: JSON.stringify({
                 address: address,
-                entry_date: new Date().toISOString().slice(0, 10)
+                entry_date: new Date().toISOString().slice(0, 10),
+                lat: lat,
+                lng: lng,
             })
         })
         const data = await response.json()
