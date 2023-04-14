@@ -6,10 +6,10 @@
     color: var(--accent-text-color);
     height: var(--nav-height);
     font-weight: bold;
-    font-size: 1.75rem;
+    font-size: 1.25rem;
 }
 
-a {
+a#create {
     color: var(--accent-text-color);
     font-weight: bold;
     font-size: 1.25rem;

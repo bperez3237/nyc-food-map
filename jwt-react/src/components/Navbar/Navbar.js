@@ -6,9 +6,9 @@ import {Link} from 'react-router-dom'
 function Navbar({map}) {
   return (
     <div className='Navbar'>
-      <h4>App</h4>
+      <Link id='app-name' to='/'>NYC Food Map</Link>
       <Searchbar map={map} />
-      <Link to='/create-page'>Create New Page</Link>
+      <Link id='create' to='/create-page'>Create New Page</Link>
     </div>
   )
 }
