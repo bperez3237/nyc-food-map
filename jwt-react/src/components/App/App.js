@@ -28,7 +28,7 @@ function App() {
         <Navbar map={map}/>
         <Switch>
           <Route exact path="/">
-            <HomePage map={map} setMap={setMap}/>
+            <HomePage map={map} setMap={setMap} locations={locations}/>
           </Route>
           <Route path="/create-page">
             <CreatePage map={map} locations={locations} setLocations={setLocations}/>

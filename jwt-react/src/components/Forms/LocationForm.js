@@ -2,13 +2,7 @@
 
 function LocationForm({locations, setLocations}) {
     const [address, setAddress] = useState('')
-    // const [locations, setLocations] = useState([])
-
-    useEffect(() => {
-        fetch('http://127.0.0.1:8000/locations/')
-            .then(res => res.json())
-            .then(data => setLocations(data.locations))
-    }, [])
+    
 
     const locationElements = locations ? locations.map(location => {
         return (
@@ -46,8 +40,8 @@ function LocationForm({locations, setLocations}) {
                 console.log('Address is not in NYC')
             }
             else {
-                const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
-                const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
+                const lat = (results[0].geometry.viewport.Va.lo + results[0].geometry.viewport.Va.hi) / 2;
+                const lng = (results[0].geometry.viewport.Ha.lo + results[0].geometry.viewport.Ha.hi) / 2;
                 postData(e, results[0].formatted_address, lat, lng)
             }
         });
