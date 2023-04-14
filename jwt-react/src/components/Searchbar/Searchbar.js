@@ -1,22 +1,23 @@
-import React, {useState} from 'react'
-import './Searchbar.css'
-import {BiSearch} from 'react-icons/bi'
-import {BsArrow90DegRight} from 'react-icons/bs'
+import React, { useState } from "react";
+import "./Searchbar.css";
+import { BiSearch } from "react-icons/bi";
+import { BsArrow90DegRight } from "react-icons/bs";
 
 function Searchbar({ map }) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentMarker, setCurrentMarker] = useState(null);
 
   function inNYC(address) {
-    return address.some(name => [
-      'Kings County',
-      'Manhattan',
-      'Queens County',
-      'Bronx County',
-      'Richmond County',
-    ].includes(name.long_name));
+    return address.some((name) =>
+      [
+        "Kings County",
+        "Manhattan",
+        "Queens County",
+        "Bronx County",
+        "Richmond County",
+      ].includes(name.long_name)
+    );
   }
-
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -24,16 +25,20 @@ function Searchbar({ map }) {
     // Create a new geocoder object
     const geocoder = new window.google.maps.Geocoder();
     if (!searchQuery) {
-      return
+      return;
     }
     // Use the geocoder to get the geographic coordinates of the search query
     geocoder.geocode({ address: searchQuery }, (results, status) => {
-
-      if (status === 'OK' && inNYC(results[0].address_components)) {
+      if (status === "OK" && inNYC(results[0].address_components)) {
         // Get the latitude and longitude of the first result
-        console.log(results[0].geometry.viewport)
-        const lat = (results[0].geometry.viewport.Va.lo + results[0].geometry.viewport.Va.hi) / 2;
-        const lng = (results[0].geometry.viewport.Ha.lo + results[0].geometry.viewport.Ha.hi) / 2;
+        const lat =
+          (results[0].geometry.viewport.Wa.lo +
+            results[0].geometry.viewport.Wa.hi) /
+          2;
+        const lng =
+          (results[0].geometry.viewport.Ga.lo +
+            results[0].geometry.viewport.Ga.hi) /
+          2;
 
         // Create a new marker for the search result
         const marker = new window.google.maps.Marker({
@@ -51,7 +56,10 @@ function Searchbar({ map }) {
         map.panTo({ lat, lng });
       } else {
         // Handle the geocoding error
-        console.error('Geocode was not successful for the following reason:', status);
+        console.error(
+          "Geocode was not successful for the following reason:",
+          status
+        );
       }
     });
   };
@@ -61,11 +69,17 @@ function Searchbar({ map }) {
   };
 
   return (
-    <form onSubmit={handleSearchSubmit} className='Searchbar'>
+    <form onSubmit={handleSearchSubmit} className="Searchbar">
       <BiSearch />
-      <input type='text' placeholder='Search Map' value={searchQuery} onChange={handleSearchChange} />
-      <button className='search-button' type='submit'><BsArrow90DegRight /></button>
-
+      <input
+        type="text"
+        placeholder="Search Map"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+      <button className="search-button" type="submit">
+        <BsArrow90DegRight />
+      </button>
     </form>
   );
 }
