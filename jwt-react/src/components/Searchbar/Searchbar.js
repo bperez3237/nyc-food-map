@@ -31,6 +31,7 @@ function Searchbar({ map }) {
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       if (status === "OK" && inNYC(results[0].address_components)) {
         // Get the latitude and longitude of the first result
+        console.log(results[0].geometry.viewport);
         const lat =
           (results[0].geometry.viewport.Wa.lo +
             results[0].geometry.viewport.Wa.hi) /
