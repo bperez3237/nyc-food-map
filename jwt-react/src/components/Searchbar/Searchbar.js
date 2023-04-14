@@ -31,8 +31,10 @@ function Searchbar({ map }) {
 
       if (status === 'OK' && inNYC(results[0].address_components)) {
         // Get the latitude and longitude of the first result
-        const lat = (results[0].geometry.viewport.Wa.lo + results[0].geometry.viewport.Wa.hi) / 2;
-        const lng = (results[0].geometry.viewport.Ga.lo + results[0].geometry.viewport.Ga.hi) / 2;
+        // console.log(results[0].geometry.viewport)
+        // Ha for lat and Va for long on windows pc
+        const lat = (results[0].geometry.viewport.Va.lo + results[0].geometry.viewport.Va.hi) / 2;
+        const lng = (results[0].geometry.viewport.Ha.lo + results[0].geometry.viewport.Ha.hi) / 2;
 
         // Create a new marker for the search result
         const marker = new window.google.maps.Marker({

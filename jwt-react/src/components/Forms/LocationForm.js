@@ -1,8 +1,8 @@
 ﻿import React, {useState, useEffect} from 'react'
 
-function LocationForm() {
+function LocationForm({locations, setLocations}) {
     const [address, setAddress] = useState('')
-    const [locations, setLocations] = useState([])
+    // const [locations, setLocations] = useState([])
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/locations/')

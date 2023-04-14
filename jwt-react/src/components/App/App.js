@@ -15,6 +15,14 @@ import CreatePage from '../../pages/CreatePage';
 
 function App() {
   const [map, setMap] = useState(null);
+  const [locations, setLocations] = useState([]);
+  
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/locations/')
+        .then(res => res.json())
+        .then(data => setLocations(data.locations))
+}, [])
+
   return (
     <div className="App">
         <Navbar map={map}/>
@@ -23,7 +31,7 @@ function App() {
             <HomePage map={map} setMap={setMap}/>
           </Route>
           <Route path="/create-page">
-            <CreatePage map={map}/>
+            <CreatePage map={map} locations={locations} setLocations={setLocations}/>
           </Route>
         </Switch>
     </div>
