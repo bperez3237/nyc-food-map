@@ -1,9 +1,10 @@
 # nyc-food-map
+
 Map of street food in nyc. In Progress....
 
 App will have map of common street food corners with lists of food available and average price. Goal is to show a heat map of prices of street food across the city. Map is restricted to search within NYC.
 
-# React DRF SimpleJWT App
+## React DRF SimpleJWT App
 
 TL;DR: Django, DRF, DRF SimpleJWT with React Frontend sample.
 
@@ -16,6 +17,7 @@ here.
 Test user: `test` and pw `test`.
 
 ---
+
 ### Example repositories
 
 - Android: [Andrew-Chen-Wang/mobile-auth-example](https://github.com/Andrew-Chen-Wang/mobile-auth-example)
@@ -23,25 +25,26 @@ Test user: `test` and pw `test`.
 - React: [SimpleJWT/drf-SimpleJWT-React](https://github.com/SimpleJWT/drf-SimpleJWT-React)
 
 ---
+
 ### Introduction
 
 This repository is an example of using React on the front end comminicating with Django, Django Rest Framework and DRF SimpleJWT applications.
 
 ---
+
 ### Usage
 
-#### Backend (Django) Instructions.
-
+#### Backend (Django) Instructions
 
 1. `cd server` to get your terminal/cmd into the server directory.
 2. To run the server, create a virtual environment `virtualenv venv && source venv/bin/activate`, install packages `pip install -r requirements.txt` -- the requirements.txt file is inside the server subdirectory -- and do `python manage.py migrate && python manage.py runserver` or `python3 manage.py migrate && python3 manage.py runserver` for mac os using Python 3.
-    - Again, make sure when you do this, you are inside the server directory on your terminal/cmd.
-    - On Windows, you should do `venv\Scripts\activate` instead of `source venv/bin/activate`
+   - Again, make sure when you do this, you are inside the server directory on your terminal/cmd.
+   - On Windows, you should do `venv\Scripts\activate` instead of `source venv/bin/activate`
 3. If you're writing for an example repository, please create
-a new directory labeled with the name of the framework (e.g. jwt-ios),
-and add its `.gitignore`. Please use the
-[github/gitignore](https://github.com/github/gitignore) repository.
-Provide detailed instructions if necessary.
+   a new directory labeled with the name of the framework (e.g. jwt-ios),
+   and add its `.gitignore`. Please use the
+   [github/gitignore](https://github.com/github/gitignore) repository.
+   Provide detailed instructions if necessary.
 
 A default user with the username `test` and password `test` have been created.
 
@@ -52,7 +55,7 @@ Django-ratelimit or DRF's internal throttling mechanism.
 Django-ratelimit is more extensive -- covering Django views,
 as well -- and thus more supported by SimpleJWT.
 
-#### Frontend (jwt-react) React instructions.
+#### Frontend (jwt-react) React instructions
 
 1. `cd jwt-react` to get your terminal/server into the frontend (react) folder.
 
@@ -62,9 +65,9 @@ as well -- and thus more supported by SimpleJWT.
 
 4. Use `npm test` if you'd like to run the test which tests the api/ folder currently.
 
-
 ---
+
 ### License
 
-This repository is licensed under the 
+This repository is licensed under the
 [MIT License](https://github.com/SimpleJWT/drf-SimpleJWT-server-template/blob/master/LICENSE).
