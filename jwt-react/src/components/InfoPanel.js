@@ -5,7 +5,7 @@ function InfoPanel({ info, closePanel }) {
     <div onClick={closePanel}>
       <div
         className="panel-header"
-        style={{ display: "flex", "justify-content": "space-between" }}
+        style={{ display: "flex", justifyContent: "space-between" }}
       >
         <h2>{info.title}</h2>
         <button onClick={closePanel}>X</button>
