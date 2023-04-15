@@ -87,19 +87,20 @@ class PriceShowView(DetailView):
         return JsonResponse({'price': price_data})
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class PriceCreateView(CreateView):
     model = Price
-    fields = ['value', 'food']
+    fields = ['value', 'location', 'food']
+    success_url = reverse_lazy('price:index')
 
-    def form_valid(self, form):
-        self.object = form.save()
-        food = self.object.food
-        food.average_price = food.prices.aggregate(models.Avg('value'))['value__avg']
-        food.save()
-        return JsonResponse({'price': serializers.serialize('json', [self.object])})
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        location = Location.objects.get(pk=data['location'])
+        food = Food.objects.get(pk=data['food'])
+        price = Price(value=data['value'], location=location, food=food)
+        price.save()
+        return JsonResponse({'success': True})
 
-    def get_success_url(self):
-        return reverse_lazy('price:index')
 
 
 class FoodIndexView(ListView):
