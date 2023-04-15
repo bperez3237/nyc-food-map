@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Map({ map, setMap, locations }) {
+function Map({ map, setMap, locations, toggle, setToggle }) {
   const mapRef = useRef(null);
   console.log(locations);
+  console.log(toggle);
 
   useEffect(() => {
     const mapOptions = {
@@ -27,7 +28,19 @@ function Map({ map, setMap, locations }) {
         lng: marker.getPosition().lng(),
         title: marker.getTitle(),
       };
-      console.log(info);
+
+      console.log(toggle, info);
+
+      if (JSON.stringify(toggle) === JSON.stringify(info)) {
+        console.log("here");
+        setToggle(null);
+      } else if (JSON.stringify(toggle) !== JSON.stringify(info)) {
+        console.log("here 2");
+        setToggle(info);
+      } else {
+        console.log("here 3");
+        setToggle(info);
+      }
     });
   });
 
