@@ -16,7 +16,9 @@ function HomePage({ map, setMap, locations }) {
         toggle={toggle}
         setToggle={setToggle}
       />
-      {toggle ? <InfoPanel info={toggle} /> : null}
+      {toggle ? (
+        <InfoPanel info={toggle} closePanel={() => setToggle(null)} />
+      ) : null}
     </div>
   );
 }
