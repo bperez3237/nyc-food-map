@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InfoPanel from "../components/InfoPanel";
 import Map from "../components/Map";
 
 function HomePage({ map, setMap, locations }) {
@@ -15,6 +16,7 @@ function HomePage({ map, setMap, locations }) {
         toggle={toggle}
         setToggle={setToggle}
       />
+      {toggle ? <InfoPanel info={toggle} /> : null}
     </div>
   );
 }

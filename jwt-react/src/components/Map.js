@@ -32,13 +32,10 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
       console.log(toggle, info);
 
       if (JSON.stringify(toggle) === JSON.stringify(info)) {
-        console.log("here");
         setToggle(null);
       } else if (JSON.stringify(toggle) !== JSON.stringify(info)) {
-        console.log("here 2");
         setToggle(info);
       } else {
-        console.log("here 3");
         setToggle(info);
       }
     });
