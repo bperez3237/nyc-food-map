@@ -5,12 +5,16 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
   console.log(locations);
   console.log(toggle);
 
+  const defaultMapOptions = {
+    center: { lat: 40.7, lng: -73.95 },
+    zoom: 11.5,
+  };
+
   useEffect(() => {
-    const mapOptions = {
-      center: { lat: 40.7, lng: -73.9 },
-      zoom: 11.5,
-    };
-    const mapInstance = new window.google.maps.Map(mapRef.current, mapOptions);
+    const mapInstance = new window.google.maps.Map(
+      mapRef.current,
+      defaultMapOptions
+    );
     setMap(mapInstance);
   }, []);
 
@@ -29,14 +33,14 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
         title: marker.getTitle(),
       };
 
-      console.log(toggle, info);
-
       if (JSON.stringify(toggle) === JSON.stringify(info)) {
         setToggle(null);
-      } else if (JSON.stringify(toggle) !== JSON.stringify(info)) {
-        setToggle(info);
+        map.setCenter(defaultMapOptions.center);
+        map.setZoom(defaultMapOptions.zoom);
       } else {
         setToggle(info);
+        map.setCenter(marker.getPosition());
+        map.setZoom(15);
       }
     });
   });
