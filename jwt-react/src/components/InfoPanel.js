@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function InfoPanel({ info, closePanel }) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(
+        `http://127.0.0.1:8000/locations/${info.id}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setData(data.location);
+    };
+    getData();
+  }, [info.id]);
+
+  console.log(data);
   return (
     <div onClick={closePanel}>
       <div

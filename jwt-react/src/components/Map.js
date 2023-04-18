@@ -2,9 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 function Map({ map, setMap, locations, toggle, setToggle }) {
   const mapRef = useRef(null);
-  console.log(locations);
-  console.log(toggle);
-
   useEffect(() => {
     const mapOptions = {
       center: { lat: 40.7, lng: -73.9 },
@@ -27,9 +24,8 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
         lat: marker.getPosition().lat(),
         lng: marker.getPosition().lng(),
         title: marker.getTitle(),
+        id: location.id,
       };
-
-      console.log(toggle, info);
 
       if (JSON.stringify(toggle) === JSON.stringify(info)) {
         setToggle(null);
