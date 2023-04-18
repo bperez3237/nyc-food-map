@@ -9,7 +9,6 @@ function InfoPanel({ info, closePanel }) {
         `http://127.0.0.1:8000/locations/${info.id}`
       );
       const data = await response.json();
-      console.log(data);
       setData(data.location);
     };
     getData();
@@ -27,6 +26,7 @@ function InfoPanel({ info, closePanel }) {
       </div>
       <p>Latitude: {info.lat}</p>
       <p>Longitude: {info.lng}</p>
+      <p>Average Price: {data.average_price}</p>
     </div>
   );
 }

@@ -43,7 +43,6 @@ function PriceForm({ locations, foods }) {
       }),
     });
     const data = await response.json();
-    console.log(data);
     setPrice("");
   };
 
@@ -54,9 +53,13 @@ function PriceForm({ locations, foods }) {
         <label>Price:</label>
         <input value={price} onChange={(e) => setPrice(e.target.value)} />
         <label>Location:</label>
-        <select>{locationOptions}</select>
+        <select onChange={(e) => setSelectedLocation(e.target.value)}>
+          {locationOptions}
+        </select>
         <label>Food:</label>
-        <select>{foodOptions}</select>
+        <select onChange={(e) => setSelectedFood(e.target.value)}>
+          {foodOptions}
+        </select>
         <button type="submit">Submit</button>
       </form>
     </div>

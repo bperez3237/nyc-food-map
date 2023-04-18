@@ -48,6 +48,7 @@ class LocationShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         location = self.get_object()
+        location.calculate_average_price()
         location_data = {
             'id': location.id,
             'lat': location.lat,
@@ -123,6 +124,7 @@ class FoodShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         food = self.get_object()
+        food.calculate_average_price()
         food_data = serializers.serialize('json', [food])
         return JsonResponse({'food': food_data})
 
