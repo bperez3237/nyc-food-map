@@ -23,6 +23,8 @@ function App() {
         .then(data => setLocations(data.locations))
 }, [])
 
+console.log(locations)
+
   return (
     <div className="App">
         <Navbar map={map}/>
