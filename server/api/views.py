@@ -53,10 +53,11 @@ class LocationShowView(DetailView):
             'lat': location.lat,
             'lng': location.lng,
             'address': location.address,
+            'average_price': location.average_price,
             'prices': [
                 {'food': price.food.name, 'value': price.value}
                 for price in location.prices.all()
-            ]
+            ],
         }
         return JsonResponse({'location': location_data})
 

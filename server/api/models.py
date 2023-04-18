@@ -9,6 +9,13 @@ class Location(models.Model):
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     entry_date = models.DateField()
+    def calculate_average_price(self):
+        prices = self.prices.all()
+        if prices:
+            total_price = sum(price.value for price in prices)
+            self.average_price = total_price / len(prices)
+            self.save()
+    
 
 class Price(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='prices')
