@@ -1,8 +1,5 @@
-from django.shortcuts import render
-from rest_framework import status
-from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse, JsonResponse
-import rest_framework.status
+
 
 # Create your views here.
 from django.shortcuts import get_object_or_404
@@ -51,7 +48,16 @@ class LocationShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         location = self.get_object()
-        location_data = serializers.serialize('json', [location])
+        location_data = {
+            'id': location.id,
+            'lat': location.lat,
+            'lng': location.lng,
+            'address': location.address,
+            'prices': [
+                {'food': price.food.name, 'value': price.value}
+                for price in location.prices.all()
+            ]
+        }
         return JsonResponse({'location': location_data})
 
 
