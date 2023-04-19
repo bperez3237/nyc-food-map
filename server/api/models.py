@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 # Create your models here.
-
 class Location(models.Model):
     address = models.CharField(max_length=255)
     lat = models.FloatField(null=True, blank=True)
