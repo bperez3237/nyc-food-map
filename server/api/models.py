@@ -10,6 +10,7 @@ class Location(models.Model):
     lng = models.FloatField(null=True, blank=True)
     entry_date = models.DateField()
     average_price = models.FloatField(null=True, blank=True)
+    
     def calculate_average_price(self):
         prices = self.prices.all()
         if prices:
