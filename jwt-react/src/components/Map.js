@@ -20,6 +20,7 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
 
     marker.addListener("click", () => {
       // Get information about the marker
+
       const info = {
         lat: marker.getPosition().lat(),
         lng: marker.getPosition().lng(),

@@ -16,7 +16,7 @@ function InfoPanel({ info, closePanel }) {
 
   console.log(data);
   return (
-    <div onClick={closePanel}>
+    <div>
       <div
         className="panel-header"
         style={{ display: "flex", justifyContent: "space-between" }}

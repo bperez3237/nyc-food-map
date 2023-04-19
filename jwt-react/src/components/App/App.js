@@ -33,6 +33,7 @@ function App() {
             setLocations={setLocations}
           />
         </Route>
+        <Route path="/add-price"></Route>
       </Switch>
     </div>
   );

@@ -33,12 +33,12 @@ function Searchbar({ map }) {
         // Get the latitude and longitude of the first result
         console.log(results[0].geometry.viewport);
         const lat =
-          (results[0].geometry.viewport.Wa.lo +
-            results[0].geometry.viewport.Wa.hi) /
+          (results[0].geometry.viewport.Va.lo +
+            results[0].geometry.viewport.Va.hi) /
           2;
         const lng =
-          (results[0].geometry.viewport.Ga.lo +
-            results[0].geometry.viewport.Ga.hi) /
+          (results[0].geometry.viewport.Ha.lo +
+            results[0].geometry.viewport.Ha.hi) /
           2;
 
         // Create a new marker for the search result
