@@ -14,7 +14,6 @@ function SidePanel({
     setSelectedMarker(null);
   };
 
-  console.log(selectedMarker);
   return (
     <div className={`side-panel${sidePanelOpen ? " open" : ""}`}>
       <p>testing</p>

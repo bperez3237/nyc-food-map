@@ -14,7 +14,6 @@ function InfoPanel({ selectedMarker, setSelectedMarker }) {
     getData();
   }, [selectedMarker]);
 
-  console.log(data);
   return (
     <div>
       <div

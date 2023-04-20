@@ -36,7 +36,6 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
       }),
     });
     const data = await response.json();
-    console.log(selectedMarker.prices);
     const new_prices = [...selectedMarker.prices, data];
     const new_average =
       new_prices.reduce((total, price) => total + price.value, 0) /
@@ -47,11 +46,6 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
       average_price: new_average,
     });
 
-    console.log({
-      ...selectedMarker,
-      prices: [...selectedMarker.prices, data],
-      average_price: new_average,
-    });
     setPrice(0);
   };
 
