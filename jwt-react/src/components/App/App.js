@@ -3,7 +3,7 @@ import "./App.css";
 
 import HomePage from "../../pages/HomePage.js";
 
-import { Switch, Route, useHistory, useParams } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar.js";
 import CreatePage from "../../pages/CreatePage";
 

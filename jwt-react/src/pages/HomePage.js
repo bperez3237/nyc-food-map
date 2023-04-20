@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import InfoPanel from "../components/InfoPanel";
 import Map from "../components/Map";
 import "./Homepage.css";
 import SidePanel from "../components/SidePanel";
@@ -30,12 +29,6 @@ function HomePage({ map, setMap, locations, foods }) {
           setSelectedMarker={setSelectedMarker}
         />
       </div>
-      {selectedMarker ? (
-        <InfoPanel
-          selectedMarker={selectedMarker}
-          setSelectedMarker={setSelectedMarker}
-        />
-      ) : null}
     </div>
   );
 }
