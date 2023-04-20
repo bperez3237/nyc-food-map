@@ -30,7 +30,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           {locations.length === 0 || foods.length === 0 ? (
-            <div className="loading">loading</div>
+            <div className="loading">
+              <h1>Loading</h1>
+            </div>
           ) : (
             <HomePage
               map={map}

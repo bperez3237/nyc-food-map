@@ -3,7 +3,6 @@
 function PriceForm({ locations, foods }) {
   const [selectedLocation, setSelectedLocation] = useState(locations[0].id);
   const [selectedFood, setSelectedFood] = useState(foods[0].id);
-  const [prices, setPrices] = useState([]);
   const [price, setPrice] = useState(0);
 
   const foodOptions = foods.map((food) => (
@@ -43,7 +42,7 @@ function PriceForm({ locations, foods }) {
       }),
     });
     const data = await response.json();
-    setPrice("");
+    setPrice(0);
   };
 
   return (

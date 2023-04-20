@@ -26,12 +26,14 @@ function HomePage({ map, setMap, locations, foods }) {
           setSidePanelOpen={setSide}
           foods={foods}
           locations={locations}
+          selectedMarker={selectedMarker}
+          setSelectedMarker={setSelectedMarker}
         />
       </div>
       {selectedMarker ? (
         <InfoPanel
-          info={selectedMarker}
-          closePanel={() => setSelectedMarker(null)}
+          selectedMarker={selectedMarker}
+          setSelectedMarker={setSelectedMarker}
         />
       ) : null}
     </div>
