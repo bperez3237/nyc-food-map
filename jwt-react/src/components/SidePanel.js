@@ -26,7 +26,11 @@ function SidePanel({
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
           />
-          <PriceForm foods={foods} selectedMarker={selectedMarker} />
+          <PriceForm
+            foods={foods}
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+          />
         </>
       ) : null}
     </div>

@@ -40,7 +40,21 @@ class LocationIndexView(ListView):
     model = Location
 
     def get(self, request, *args, **kwargs):
-        locations = list(self.get_queryset().values())
+        locations = []
+        for location in self.get_queryset():
+            location.calculate_average_price()
+            location_data = {
+                'id': location.id,
+                'lat': location.lat,
+                'lng': location.lng,
+                'address': location.address,
+                'average_price': location.average_price,
+                'prices': [
+                    {'food': price.food.name, 'value': price.value}
+                    for price in location.prices.all()
+                ],
+            }
+            locations.append(location_data)
         return JsonResponse({'locations': locations})
 
 

@@ -28,21 +28,14 @@ function Map({
     marker.addListener("click", () => {
       // Get information about the marker
 
-      const info = {
-        lat: marker.getPosition().lat(),
-        lng: marker.getPosition().lng(),
-        title: marker.getTitle(),
-        id: location.id,
-      };
-
-      if (JSON.stringify(selectedMarker) === JSON.stringify(info)) {
+      if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
         setSelectedMarker(null);
         setSidePanelOpen(false);
-      } else if (JSON.stringify(selectedMarker) !== JSON.stringify(info)) {
-        setSelectedMarker(info);
+      } else if (JSON.stringify(selectedMarker) !== JSON.stringify(location)) {
+        setSelectedMarker(location);
         setSidePanelOpen(true);
       } else {
-        setSelectedMarker(info);
+        setSelectedMarker(location);
         setSidePanelOpen(true);
       }
     });
