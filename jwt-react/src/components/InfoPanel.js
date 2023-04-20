@@ -16,15 +16,16 @@ function InfoPanel({ selectedMarker, setSelectedMarker }) {
   }, [selectedMarker]);
 
   return (
-    <div>
+    <div className="info-panel">
       <div
-        className="panel-header"
+        className="info-panel-header"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <h2>{formatAddress(selectedMarker.address)}</h2>
       </div>
-      <p>Latitude: {selectedMarker.lat?.toFixed(2)}</p>
-      <p>Longitude: {selectedMarker.lng?.toFixed(2)}</p>
+      <p>{`(${selectedMarker.lat?.toFixed(2)},${selectedMarker.lng?.toFixed(
+        2
+      )})`}</p>
       <p>Average Price: {data.average_price?.toFixed(2)}</p>
     </div>
   );

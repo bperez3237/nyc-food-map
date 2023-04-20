@@ -14,10 +14,6 @@
   width: 100%;
 }
 
-.info-panel {
-  width: 10%;
-}
-
 .map {
   height: calc(100vh - 128px);
   width: 100%;
@@ -44,4 +40,13 @@
 .side-panel-header {
   display: flex;
   flex-direction: row;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-panel-header {
+  flex-direction: column;
 }
