@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Map({ map, setMap, locations, toggle, setToggle }) {
+function Map({
+  map,
+  setMap,
+  locations,
+  selectedMarker,
+  setSelectedMarker,
+  setSidePanelOpen,
+}) {
   const mapRef = useRef(null);
   useEffect(() => {
     const mapOptions = {
@@ -28,12 +35,15 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
         id: location.id,
       };
 
-      if (JSON.stringify(toggle) === JSON.stringify(info)) {
-        setToggle(null);
-      } else if (JSON.stringify(toggle) !== JSON.stringify(info)) {
-        setToggle(info);
+      if (JSON.stringify(selectedMarker) === JSON.stringify(info)) {
+        setSelectedMarker(null);
+        setSidePanelOpen(false);
+      } else if (JSON.stringify(selectedMarker) !== JSON.stringify(info)) {
+        setSelectedMarker(info);
+        setSidePanelOpen(true);
       } else {
-        setToggle(info);
+        setSelectedMarker(info);
+        setSidePanelOpen(true);
       }
     });
   });

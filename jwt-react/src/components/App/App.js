@@ -10,8 +10,13 @@ import CreatePage from "../../pages/CreatePage";
 function App() {
   const [map, setMap] = useState(null);
   const [locations, setLocations] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   useEffect(() => {
+    fetch("http://127.0.0.1:8000/foods/")
+      .then((res) => res.json())
+      .then((data) => setFoods(data.foods));
+
     fetch("http://127.0.0.1:8000/locations/")
       .then((res) => res.json())
       .then((data) => setLocations(data.locations));
@@ -24,7 +29,16 @@ function App() {
       <Navbar map={map} />
       <Switch>
         <Route exact path="/">
-          <HomePage map={map} setMap={setMap} locations={locations} />
+          {locations.length === 0 || foods.length === 0 ? (
+            <div className="loading">loading</div>
+          ) : (
+            <HomePage
+              map={map}
+              setMap={setMap}
+              locations={locations}
+              foods={foods}
+            />
+          )}
         </Route>
         <Route path="/create-page">
           <CreatePage

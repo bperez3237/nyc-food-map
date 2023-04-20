@@ -4,8 +4,8 @@ import Map from "../components/Map";
 import "./Homepage.css";
 import SidePanel from "../components/SidePanel";
 
-function HomePage({ map, setMap, locations }) {
-  const [toggle, setToggle] = useState(null);
+function HomePage({ map, setMap, locations, foods }) {
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const [side, setSide] = useState(false);
 
   return (
@@ -17,13 +17,22 @@ function HomePage({ map, setMap, locations }) {
           map={map}
           setMap={setMap}
           locations={locations}
-          toggle={toggle}
-          setToggle={setToggle}
+          selectedMarker={selectedMarker}
+          setSelectedMarker={setSelectedMarker}
+          setSidePanelOpen={setSide}
         />
-        <SidePanel sidePanelOpen={side} setSidePanelOpen={setSide} />
+        <SidePanel
+          sidePanelOpen={side}
+          setSidePanelOpen={setSide}
+          foods={foods}
+          locations={locations}
+        />
       </div>
-      {toggle ? (
-        <InfoPanel info={toggle} closePanel={() => setToggle(null)} />
+      {selectedMarker ? (
+        <InfoPanel
+          info={selectedMarker}
+          closePanel={() => setSelectedMarker(null)}
+        />
       ) : null}
     </div>
   );

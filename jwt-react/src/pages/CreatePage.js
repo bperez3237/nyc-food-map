@@ -3,15 +3,8 @@ import LocationForm from "../components/Forms/LocationForm";
 import FoodForm from "../components/Forms/FoodForm";
 import PriceForm from "../components/Forms/PriceForm";
 
-function CreatePage({ locations, setLocations }) {
+function CreatePage({ locations, setLocations, foods, setFoods }) {
   const [toggle, setToggle] = useState("left");
-  const [foods, setFoods] = useState([]);
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/foods/")
-      .then((res) => res.json())
-      .then((data) => setFoods(data.foods));
-  }, []);
 
   const handleClick = () => {
     if (toggle === "left") {
