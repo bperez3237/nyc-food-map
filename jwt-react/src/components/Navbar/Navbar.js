@@ -10,12 +10,12 @@ function Navbar({ map }) {
         NYC Food Map
       </Link>
       <Searchbar map={map} />
-      <Link id="create" to="/create-page">
+      {/* <Link id="create" to="/create-page">
         Create New Page
-      </Link>
-      <Link id="create" to="/add-page">
+      </Link> */}
+      {/* <Link id="create" to="/add-page">
         Add Price
-      </Link>
+      </Link> */}
     </div>
   );
 }

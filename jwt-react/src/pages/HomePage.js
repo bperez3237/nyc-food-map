@@ -24,7 +24,6 @@ function HomePage({ map, setMap, locations, foods }) {
           sidePanelOpen={side}
           setSidePanelOpen={setSide}
           foods={foods}
-          locations={locations}
           selectedMarker={selectedMarker}
           setSelectedMarker={setSelectedMarker}
         />

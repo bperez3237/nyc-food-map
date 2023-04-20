@@ -1,6 +1,6 @@
 ﻿import React, { useState } from "react";
 
-function PriceForm({ locationId, foods }) {
+function PriceForm({ selectedMarker, foods }) {
   const [selectedFood, setSelectedFood] = useState(foods[0].id);
   const [price, setPrice] = useState(0);
 
@@ -31,7 +31,7 @@ function PriceForm({ locationId, foods }) {
       },
       body: JSON.stringify({
         value: Number(price),
-        location: locationId,
+        location: selectedMarker.id,
         food: selectedFood,
       }),
     });
