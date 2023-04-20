@@ -40,3 +40,8 @@
 .side-panel.open {
   right: 0;
 }
+
+.side-panel-header {
+  display: flex;
+  flex-direction: row;
+}

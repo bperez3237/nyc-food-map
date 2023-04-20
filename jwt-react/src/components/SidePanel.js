@@ -16,9 +16,9 @@ function SidePanel({
 
   return (
     <div className={`side-panel${sidePanelOpen ? " open" : ""}`}>
-      <p>testing</p>
-
-      <button onClick={closeSidePanel}>X</button>
+      <div className="side-panel-header">
+        <button onClick={closeSidePanel}>X</button>
+      </div>
       {selectedMarker ? (
         <>
           <InfoPanel

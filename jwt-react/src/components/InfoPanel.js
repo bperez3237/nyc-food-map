@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import formatAddress from "../utils/format.tsx";
 
 function InfoPanel({ selectedMarker, setSelectedMarker }) {
   const [data, setData] = useState([]);
@@ -20,11 +21,11 @@ function InfoPanel({ selectedMarker, setSelectedMarker }) {
         className="panel-header"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <h2>{selectedMarker.title}</h2>
+        <h2>{formatAddress(selectedMarker.address)}</h2>
       </div>
-      <p>Latitude: {selectedMarker.lat}</p>
-      <p>Longitude: {selectedMarker.lng}</p>
-      <p>Average Price: {data.average_price}</p>
+      <p>Latitude: {selectedMarker.lat?.toFixed(2)}</p>
+      <p>Longitude: {selectedMarker.lng?.toFixed(2)}</p>
+      <p>Average Price: {data.average_price?.toFixed(2)}</p>
     </div>
   );
 }
