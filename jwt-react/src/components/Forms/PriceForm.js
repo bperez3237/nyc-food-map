@@ -1,18 +1,12 @@
 ﻿import React, { useState } from "react";
 
-function PriceForm({ locations, foods }) {
-  const [selectedLocation, setSelectedLocation] = useState(locations[0].id);
+function PriceForm({ locationId, foods }) {
   const [selectedFood, setSelectedFood] = useState(foods[0].id);
   const [price, setPrice] = useState(0);
 
   const foodOptions = foods.map((food) => (
     <option key={food.id} value={food.id}>
       {food.name}
-    </option>
-  ));
-  const locationOptions = locations.map((location) => (
-    <option key={location.id} value={location.id}>
-      {location.address}
     </option>
   ));
 
@@ -37,11 +31,12 @@ function PriceForm({ locations, foods }) {
       },
       body: JSON.stringify({
         value: Number(price),
-        location: selectedLocation,
+        location: locationId,
         food: selectedFood,
       }),
     });
     const data = await response.json();
+    console.log(data);
     setPrice(0);
   };
 
@@ -51,10 +46,6 @@ function PriceForm({ locations, foods }) {
       <form onSubmit={handleSubmit}>
         <label>Price:</label>
         <input value={price} onChange={(e) => setPrice(e.target.value)} />
-        <label>Location:</label>
-        <select onChange={(e) => setSelectedLocation(e.target.value)}>
-          {locationOptions}
-        </select>
         <label>Food:</label>
         <select onChange={(e) => setSelectedFood(e.target.value)}>
           {foodOptions}

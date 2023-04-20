@@ -14,18 +14,26 @@ function SidePanel({
     setSidePanelOpen(false);
     setSelectedMarker(null);
   };
+
+  console.log(selectedMarker);
   return (
     <div className={`side-panel${sidePanelOpen ? " open" : ""}`}>
       <p>testing</p>
 
       <button onClick={closeSidePanel}>X</button>
       {selectedMarker ? (
-        <InfoPanel
-          selectedMarker={selectedMarker}
-          setSelectedMarker={setSelectedMarker}
-        />
+        <>
+          <InfoPanel
+            selectedMarker={selectedMarker}
+            setSelectedMarker={setSelectedMarker}
+          />
+          <PriceForm
+            foods={foods}
+            // locations={locations}
+            locationId={selectedMarker.id}
+          />
+        </>
       ) : null}
-      <PriceForm foods={foods} locations={locations} />
     </div>
   );
 }
