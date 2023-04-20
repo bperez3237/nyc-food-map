@@ -42,6 +42,10 @@
   flex-direction: row;
 }
 
+.side-panel-content {
+  margin-top: 20px;
+}
+
 .info-panel {
   display: flex;
   flex-direction: column;
@@ -49,4 +53,10 @@
 
 .info-panel-header {
   flex-direction: column;
+}
+
+.price-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
 }

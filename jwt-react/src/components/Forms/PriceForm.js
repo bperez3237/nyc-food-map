@@ -50,15 +50,17 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
   };
 
   return (
-    <div>
-      <h1>Add Price</h1>
+    <div className="price-form">
+      <h4>Add Price</h4>
       <form onSubmit={handleSubmit}>
         <label>Price:</label>
         <input value={price} onChange={(e) => setPrice(e.target.value)} />
+        <br />
         <label>Food:</label>
         <select onChange={(e) => setSelectedFood(e.target.value)}>
           {foodOptions}
         </select>
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>

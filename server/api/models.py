@@ -25,6 +25,7 @@ class Price(models.Model):
 
 class Food(models.Model):
     name = models.CharField(max_length=255)
+    emoji = models.CharField(max_length=255)
     average_price = models.FloatField(null=True, blank=True)
 
     def calculate_average_price(self):

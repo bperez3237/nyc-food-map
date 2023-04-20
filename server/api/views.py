@@ -146,12 +146,12 @@ class FoodShowView(DetailView):
 @method_decorator(csrf_exempt, name='dispatch')
 class FoodCreateView(CreateView):
     model = Food
-    fields = ['name']
+    fields = ['name', 'emoji']
     success_url = reverse_lazy('food:index')
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        food = Food(name=data['name'])
+        food = Food(name=data['name'], emoji=data['emoji'])
         food.save()
         return JsonResponse({'success': True})
 

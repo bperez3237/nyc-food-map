@@ -20,7 +20,7 @@ function SidePanel({
         <button onClick={closeSidePanel}>X</button>
       </div>
       {selectedMarker ? (
-        <>
+        <div className="side-panel-content">
           <InfoPanel
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
@@ -30,8 +30,9 @@ function SidePanel({
             selectedMarker={selectedMarker}
             setSelectedMarker={setSelectedMarker}
           />
-        </>
+        </div>
       ) : null}
+      <h3>&#128054;</h3>
     </div>
   );
 }
