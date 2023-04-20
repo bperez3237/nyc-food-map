@@ -12,7 +12,7 @@ function InfoPanel({ selectedMarker, setSelectedMarker }) {
       setData(data.location);
     };
     getData();
-  }, [selectedMarker.id]);
+  }, [selectedMarker]);
 
   console.log(data);
   return (

@@ -50,7 +50,7 @@ class LocationIndexView(ListView):
                 'address': location.address,
                 'average_price': location.average_price,
                 'prices': [
-                    {'food': price.food.name, 'value': price.value}
+                    {'food': price.food.name, 'value': price.value, 'location': location.address }
                     for price in location.prices.all()
                 ],
             }
@@ -71,7 +71,7 @@ class LocationShowView(DetailView):
             'address': location.address,
             'average_price': location.average_price,
             'prices': [
-                {'food': price.food.name, 'value': price.value}
+                    {'food': price.food.name, 'value': price.value, 'location': location.address }
                 for price in location.prices.all()
             ],
         }
