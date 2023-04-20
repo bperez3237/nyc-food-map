@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 import json
 from django.core import serializers
 
+
 # @csrf_exempt
 class LocationIndexView(ListView):
     model = Location
@@ -107,7 +108,7 @@ class PriceCreateView(CreateView):
         food = Food.objects.get(pk=data['food'])
         price = Price(value=data['value'], location=location, food=food)
         price.save()
-        return JsonResponse({'success': True})
+        return JsonResponse({'value': price.value, 'food': food.name, 'location': location.address}, status=201)
 
 
 
