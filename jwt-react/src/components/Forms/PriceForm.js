@@ -1,7 +1,8 @@
 ﻿import React, { useState } from "react";
+import FoodSelect from "../FoodSelect";
 
 function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
-  const [selectedFood, setSelectedFood] = useState(foods[0].id);
+  const [selectedFood, setSelectedFood] = useState(null);
   const [price, setPrice] = useState(0);
 
   const foodOptions = foods.map((food) => (
@@ -60,6 +61,11 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
         <select onChange={(e) => setSelectedFood(e.target.value)}>
           {foodOptions}
         </select>
+        <FoodSelect
+          foods={foods}
+          selectedFood={selectedFood}
+          setSelectedFood={setSelectedFood}
+        />
         <br />
         <button type="submit">Submit</button>
       </form>

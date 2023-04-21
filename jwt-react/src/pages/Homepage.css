@@ -60,3 +60,23 @@
   flex-direction: column;
   margin-top: 40px;
 }
+
+.food-select {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.food-select-option:hover {
+  background-color: #ff0101;
+  cursor: pointer;
+}
+
+.food-select-option-selected {
+  background-color: #e3ca0c;
+}
+
+.food-select-option-selected:hover {
+  background-color: #ff0101;
+  cursor: pointer;
+}

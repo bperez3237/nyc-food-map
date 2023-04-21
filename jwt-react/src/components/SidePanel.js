@@ -32,7 +32,6 @@ function SidePanel({
           />
         </div>
       ) : null}
-      <h3>&#128054;</h3>
     </div>
   );
 }
