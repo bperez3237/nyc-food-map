@@ -1,9 +1,21 @@
 ﻿import React, { useState, useEffect } from "react";
 
-function FoodForm({ foods, setFoods }) {
-  const [name, setName] = useState("");
+type Food = {
+  id: number;
+  name: string;
+  emoji: string;
+};
 
-  const foodElements = foods
+type Props = {
+  foods: Food[] | null;
+  setFoods: React.Dispatch<React.SetStateAction<Food[] | null>>;
+};
+
+function FoodForm({ foods, setFoods }: Props): JSX.Element {
+  const [name, setName] = useState<string>("");
+  const [emojiCode, setEmojiCode] = useState<string>("");
+
+  const foodElements: JSX.Element[] = foods
     ? foods.map((food) => {
         return (
           <div key={food.id}>
@@ -13,7 +25,7 @@ function FoodForm({ foods, setFoods }) {
       })
     : [];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name) {
@@ -23,7 +35,7 @@ function FoodForm({ foods, setFoods }) {
     postData(e);
   };
 
-  const postData = async (e) => {
+  const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     const response = await fetch("http://127.0.0.1:8000/foods/create/", {
       method: "POST",
       headers: {
@@ -31,11 +43,13 @@ function FoodForm({ foods, setFoods }) {
       },
       body: JSON.stringify({
         name: name,
+        emoji: emojiCode,
       }),
     });
     const data = await response.json();
     console.log(data);
     setName("");
+    setEmojiCode("");
   };
 
   return (
@@ -44,6 +58,11 @@ function FoodForm({ foods, setFoods }) {
       <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input value={name} onChange={(e) => setName(e.target.value)} />
+        <label>Emoji</label>
+        <input
+          value={emojiCode}
+          onChange={(e) => setEmojiCode(e.target.value)}
+        />
         <button type="submit">Submit</button>
       </form>
       {foodElements}

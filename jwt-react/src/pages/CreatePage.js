@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LocationForm from "../components/Forms/LocationForm";
-import FoodForm from "../components/Forms/FoodForm";
+import FoodForm from "../components/Forms/FoodForm.tsx";
 import PriceForm from "../components/Forms/PriceForm";
 
 function CreatePage({ locations, setLocations, foods, setFoods }) {
