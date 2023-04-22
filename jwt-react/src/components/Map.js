@@ -9,17 +9,12 @@ function Map({
   setSidePanelOpen,
 }) {
   const mapRef = useRef(null);
-
-  const defaultMapOptions = {
-    center: { lat: 40.7, lng: -73.95 },
-    zoom: 11.5,
-  };
-
   useEffect(() => {
-    const mapInstance = new window.google.maps.Map(
-      mapRef.current,
-      defaultMapOptions
-    );
+    const mapOptions = {
+      center: { lat: 40.7, lng: -73.9 },
+      zoom: 11.7,
+    };
+    const mapInstance = new window.google.maps.Map(mapRef.current, mapOptions);
     setMap(mapInstance);
   }, []);
 
@@ -32,20 +27,16 @@ function Map({
 
     marker.addListener("click", () => {
       // Get information about the marker
-      const info = {
-        lat: marker.getPosition().lat(),
-        lng: marker.getPosition().lng(),
-        title: marker.getTitle(),
-      };
 
-      if (JSON.stringify(selectedMarker) === JSON.stringify(info)) {
+      if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
         setSelectedMarker(null);
-        map.setCenter(defaultMapOptions.center);
-        map.setZoom(defaultMapOptions.zoom);
+        setSidePanelOpen(false);
+      } else if (JSON.stringify(selectedMarker) !== JSON.stringify(location)) {
+        setSelectedMarker(location);
+        setSidePanelOpen(true);
       } else {
-        setSelectedMarker(info);
-        map.setCenter(marker.getPosition());
-        map.setZoom(15);
+        setSelectedMarker(location);
+        setSidePanelOpen(true);
       }
     });
   });
