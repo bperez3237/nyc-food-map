@@ -9,8 +9,6 @@ function Map({
   setSidePanelOpen,
 }) {
   const mapRef = useRef(null);
-  console.log(locations);
-  console.log(toggle);
 
   const defaultMapOptions = {
     center: { lat: 40.7, lng: -73.95 },
@@ -40,12 +38,12 @@ function Map({
         title: marker.getTitle(),
       };
 
-      if (JSON.stringify(toggle) === JSON.stringify(info)) {
-        setToggle(null);
+      if (JSON.stringify(selectedMarker) === JSON.stringify(info)) {
+        setSelectedMarker(null);
         map.setCenter(defaultMapOptions.center);
         map.setZoom(defaultMapOptions.zoom);
       } else {
-        setToggle(info);
+        setSelectedMarker(info);
         map.setCenter(marker.getPosition());
         map.setZoom(15);
       }
