@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
+const defaultMapOptions = {
+  center: { lat: 40.7, lng: -73.9 },
+  zoom: 11.7,
+};
 function Map({
   map,
   setMap,
@@ -10,11 +14,10 @@ function Map({
 }) {
   const mapRef = useRef(null);
   useEffect(() => {
-    const mapOptions = {
-      center: { lat: 40.7, lng: -73.9 },
-      zoom: 11.7,
-    };
-    const mapInstance = new window.google.maps.Map(mapRef.current, mapOptions);
+    const mapInstance = new window.google.maps.Map(
+      mapRef.current,
+      defaultMapOptions
+    );
     setMap(mapInstance);
   }, []);
 
@@ -31,12 +34,18 @@ function Map({
       if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
         setSelectedMarker(null);
         setSidePanelOpen(false);
+        // map.setCenter(defaultMapOptions.center);
+        // map.setZoom(defaultMapOptions.zoom);
       } else if (JSON.stringify(selectedMarker) !== JSON.stringify(location)) {
         setSelectedMarker(location);
         setSidePanelOpen(true);
+        // map.setCenter(marker.getPosition());
+        // map.setZoom(14);
       } else {
         setSelectedMarker(location);
         setSidePanelOpen(true);
+        // map.setCenter(marker.getPosition());
+        // map.setZoom(14);
       }
     });
   });
