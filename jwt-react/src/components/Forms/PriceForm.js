@@ -2,7 +2,7 @@
 import FoodSelect from "../FoodSelect";
 
 function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
-  const [selectedFood, setSelectedFood] = useState(null);
+  const [selectedFoodId, setSelectedFoodId] = useState(foods[0].id);
   const [price, setPrice] = useState(0);
 
   const foodOptions = foods.map((food) => (
@@ -33,7 +33,7 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
       body: JSON.stringify({
         value: Number(price),
         location: selectedMarker.id,
-        food: selectedFood,
+        food: selectedFoodId,
       }),
     });
     const data = await response.json();
@@ -58,13 +58,13 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
         <input value={price} onChange={(e) => setPrice(e.target.value)} />
         <br />
         <label>Food:</label>
-        <select onChange={(e) => setSelectedFood(e.target.value)}>
+        <select onChange={(e) => setSelectedFoodId(e.target.value)}>
           {foodOptions}
         </select>
         <FoodSelect
           foods={foods}
-          selectedFood={selectedFood}
-          setSelectedFood={setSelectedFood}
+          selectedFoodId={selectedFoodId}
+          setSelectedFoodId={setSelectedFoodId}
         />
         <br />
         <button type="submit">Submit</button>

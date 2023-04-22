@@ -22,8 +22,6 @@ function App() {
       .then((data) => setLocations(data.locations));
   }, []);
 
-  console.log(foods);
-
   return (
     <div className="App">
       <Navbar map={map} />
