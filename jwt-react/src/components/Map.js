@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Map({ map, setMap, locations, toggle, setToggle }) {
+function Map({
+  map,
+  setMap,
+  locations,
+  selectedMarker,
+  setSelectedMarker,
+  setSidePanelOpen,
+}) {
   const mapRef = useRef(null);
+<<<<<<< HEAD
   console.log(locations);
   console.log(toggle);
 
@@ -15,6 +23,14 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
       mapRef.current,
       defaultMapOptions
     );
+=======
+  useEffect(() => {
+    const mapOptions = {
+      center: { lat: 40.7, lng: -73.9 },
+      zoom: 11.7,
+    };
+    const mapInstance = new window.google.maps.Map(mapRef.current, mapOptions);
+>>>>>>> e72630569b86904739a5a4ea2e8522f4376ca59e
     setMap(mapInstance);
   }, []);
 
@@ -27,6 +43,7 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
 
     marker.addListener("click", () => {
       // Get information about the marker
+<<<<<<< HEAD
       const info = {
         lat: marker.getPosition().lat(),
         lng: marker.getPosition().lng(),
@@ -41,11 +58,23 @@ function Map({ map, setMap, locations, toggle, setToggle }) {
         setToggle(info);
         map.setCenter(marker.getPosition());
         map.setZoom(15);
+=======
+
+      if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
+        setSelectedMarker(null);
+        setSidePanelOpen(false);
+      } else if (JSON.stringify(selectedMarker) !== JSON.stringify(location)) {
+        setSelectedMarker(location);
+        setSidePanelOpen(true);
+      } else {
+        setSelectedMarker(location);
+        setSidePanelOpen(true);
+>>>>>>> e72630569b86904739a5a4ea2e8522f4376ca59e
       }
     });
   });
 
-  return <div style={{ height: "800px", width: "100%" }} ref={mapRef} />;
+  return <div className="map" ref={mapRef} />;
 }
 
 export default Map;

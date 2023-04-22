@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState } from "react";
 
 function LocationForm({ locations, setLocations }) {
   const [address, setAddress] = useState("");

@@ -1,8 +1,5 @@
-from django.shortcuts import render
-from rest_framework import status
-from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse, JsonResponse
-import rest_framework.status
+
 
 # Create your views here.
 from django.shortcuts import get_object_or_404
@@ -15,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
 from django.core import serializers
+
 
 # @csrf_exempt
 class LocationIndexView(ListView):
@@ -42,7 +40,21 @@ class LocationIndexView(ListView):
     model = Location
 
     def get(self, request, *args, **kwargs):
-        locations = list(self.get_queryset().values())
+        locations = []
+        for location in self.get_queryset():
+            location.calculate_average_price()
+            location_data = {
+                'id': location.id,
+                'lat': location.lat,
+                'lng': location.lng,
+                'address': location.address,
+                'average_price': location.average_price,
+                'prices': [
+                    {'food': price.food.name, 'value': price.value, 'location': location.address }
+                    for price in location.prices.all()
+                ],
+            }
+            locations.append(location_data)
         return JsonResponse({'locations': locations})
 
 
@@ -51,7 +63,18 @@ class LocationShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         location = self.get_object()
-        location_data = serializers.serialize('json', [location])
+        location.calculate_average_price()
+        location_data = {
+            'id': location.id,
+            'lat': location.lat,
+            'lng': location.lng,
+            'address': location.address,
+            'average_price': location.average_price,
+            'prices': [
+                    {'food': price.food.name, 'value': price.value, 'location': location.address }
+                for price in location.prices.all()
+            ],
+        }
         return JsonResponse({'location': location_data})
 
 
@@ -99,7 +122,7 @@ class PriceCreateView(CreateView):
         food = Food.objects.get(pk=data['food'])
         price = Price(value=data['value'], location=location, food=food)
         price.save()
-        return JsonResponse({'success': True})
+        return JsonResponse({'value': price.value, 'food': food.name, 'location': location.address}, status=201)
 
 
 
@@ -116,18 +139,19 @@ class FoodShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         food = self.get_object()
+        food.calculate_average_price()
         food_data = serializers.serialize('json', [food])
         return JsonResponse({'food': food_data})
 
 @method_decorator(csrf_exempt, name='dispatch')
 class FoodCreateView(CreateView):
     model = Food
-    fields = ['name']
+    fields = ['name', 'emoji']
     success_url = reverse_lazy('food:index')
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        food = Food(name=data['name'])
+        food = Food(name=data['name'], emoji=data['emoji'])
         food.save()
         return JsonResponse({'success': True})
 

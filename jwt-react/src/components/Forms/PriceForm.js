@@ -1,19 +1,13 @@
 ﻿import React, { useState } from "react";
+import FoodSelect from "../FoodSelect";
 
-function PriceForm({ locations, foods }) {
-  const [selectedLocation, setSelectedLocation] = useState(locations[0].id);
-  const [selectedFood, setSelectedFood] = useState(foods[0].id);
-  const [prices, setPrices] = useState([]);
+function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
+  const [selectedFood, setSelectedFood] = useState(null);
   const [price, setPrice] = useState(0);
 
   const foodOptions = foods.map((food) => (
     <option key={food.id} value={food.id}>
       {food.name}
-    </option>
-  ));
-  const locationOptions = locations.map((location) => (
-    <option key={location.id} value={location.id}>
-      {location.address}
     </option>
   ));
 
@@ -38,25 +32,41 @@ function PriceForm({ locations, foods }) {
       },
       body: JSON.stringify({
         value: Number(price),
-        location: selectedLocation,
+        location: selectedMarker.id,
         food: selectedFood,
       }),
     });
     const data = await response.json();
-    console.log(data);
-    setPrice("");
+    const new_prices = [...selectedMarker.prices, data];
+    const new_average =
+      new_prices.reduce((total, price) => total + price.value, 0) /
+      [...selectedMarker.prices, data].length;
+    setSelectedMarker({
+      ...selectedMarker,
+      prices: [...selectedMarker.prices, data],
+      average_price: new_average,
+    });
+
+    setPrice(0);
   };
 
   return (
-    <div>
-      <h1>Add Price</h1>
+    <div className="price-form">
+      <h4>Add Price</h4>
       <form onSubmit={handleSubmit}>
         <label>Price:</label>
         <input value={price} onChange={(e) => setPrice(e.target.value)} />
-        <label>Location:</label>
-        <select>{locationOptions}</select>
+        <br />
         <label>Food:</label>
-        <select>{foodOptions}</select>
+        <select onChange={(e) => setSelectedFood(e.target.value)}>
+          {foodOptions}
+        </select>
+        <FoodSelect
+          foods={foods}
+          selectedFood={selectedFood}
+          setSelectedFood={setSelectedFood}
+        />
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>

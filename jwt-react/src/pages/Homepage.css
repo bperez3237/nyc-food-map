@@ -1,0 +1,82 @@
+.homepage h1 {
+  margin-bottom: 0;
+}
+
+.homepage p {
+  margin-bottom: 0;
+}
+
+.main-display {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  height: calc(100vh - 128px);
+  width: 100%;
+
+  @media (min-height: 928px) {
+    height: 800px;
+  }
+}
+
+.side-panel {
+  position: absolute;
+  top: 0;
+  right: -300px; /* Position off-screen by default */
+  width: 300px;
+  height: 100%;
+  background-color: white;
+  transition: left 0.3s ease-in-out; /* Add a transition effect for sliding into view */
+}
+
+.side-panel.open {
+  right: 0;
+}
+
+.side-panel-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-panel-content {
+  margin-top: 20px;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-panel-header {
+  flex-direction: column;
+}
+
+.price-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.food-select {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.food-select-option:hover {
+  background-color: #ff0101;
+  cursor: pointer;
+}
+
+.food-select-option-selected {
+  background-color: #e3ca0c;
+}
+
+.food-select-option-selected:hover {
+  background-color: #ff0101;
+  cursor: pointer;
+}
