@@ -5,12 +5,6 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
   const [selectedFoodId, setSelectedFoodId] = useState(foods[0].id);
   const [price, setPrice] = useState(0);
 
-  const foodOptions = foods.map((food) => (
-    <option key={food.id} value={food.id}>
-      {food.name}
-    </option>
-  ));
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (price === 0) {
@@ -55,12 +49,13 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
       <h4>Add Price</h4>
       <form onSubmit={handleSubmit}>
         <label>Price:</label>
-        <input value={price} onChange={(e) => setPrice(e.target.value)} />
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
         <br />
         <label>Food:</label>
-        <select onChange={(e) => setSelectedFoodId(e.target.value)}>
-          {foodOptions}
-        </select>
         <FoodSelect
           foods={foods}
           selectedFoodId={selectedFoodId}

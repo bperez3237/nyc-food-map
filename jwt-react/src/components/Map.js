@@ -34,18 +34,18 @@ function Map({
       if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
         setSelectedMarker(null);
         setSidePanelOpen(false);
-        // map.setCenter(defaultMapOptions.center);
-        // map.setZoom(defaultMapOptions.zoom);
+        map.setCenter(defaultMapOptions.center);
+        map.setZoom(defaultMapOptions.zoom);
       } else if (JSON.stringify(selectedMarker) !== JSON.stringify(location)) {
         setSelectedMarker(location);
         setSidePanelOpen(true);
-        // map.setCenter(marker.getPosition());
-        // map.setZoom(14);
+        map.setCenter(marker.getPosition());
+        map.setZoom(14);
       } else {
         setSelectedMarker(location);
         setSidePanelOpen(true);
-        // map.setCenter(marker.getPosition());
-        // map.setZoom(14);
+        map.setCenter(marker.getPosition());
+        map.setZoom(14);
       }
     });
   });
