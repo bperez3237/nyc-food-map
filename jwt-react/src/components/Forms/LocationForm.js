@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react";
 
 function LocationForm({ locations, setLocations }) {
+  console.log(locations);
   const [address, setAddress] = useState("");
 
   const locationElements = locations
