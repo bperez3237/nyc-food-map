@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.6",
     "bootstrap": "^4.6.0",
+    "dotenv": "^16.0.3",
     "js-cookie": "^3.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
@@ -48,6 +49,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "pretty-format": "^29.5.0",
     "react-icons": "^4.7.1",
-    "typescript": "^5.0.4"
+    "typescript": "^3.2.1"
   }
 }
