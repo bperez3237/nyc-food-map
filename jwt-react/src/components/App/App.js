@@ -5,7 +5,7 @@ import HomePage from "../../pages/HomePage.js";
 
 import { Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar.js";
-import CreatePage from "../../pages/CreatePage";
+import CreatePage from "../../pages/CreatePage.tsx";
 
 function App() {
   const [map, setMap] = useState(null);

@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import formatAddress from "../utils/format.tsx";
+import formatAddress from "../utils/format";
+import type { Location } from "../types/ModelTypes";
 
-function InfoPanel({ selectedMarker, setSelectedMarker }) {
-  const [data, setData] = useState([]);
+type Props = {
+  selectedMarker: Location;
+  setSelectedMarker: React.Dispatch<React.SetStateAction<Location | null>>;
+};
+
+function InfoPanel({
+  selectedMarker,
+  setSelectedMarker,
+}: Props): JSX.Element | null {
+  const [data, setData] = useState<Location | null>(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -26,7 +35,7 @@ function InfoPanel({ selectedMarker, setSelectedMarker }) {
       <p>{`(${selectedMarker.lat?.toFixed(2)},${selectedMarker.lng?.toFixed(
         2
       )})`}</p>
-      <p>Average Price: {data.average_price?.toFixed(2)}</p>
+      <p>Average Price: {data?.average_price.toFixed(2)}</p>
     </div>
   );
 }

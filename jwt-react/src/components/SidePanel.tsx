@@ -1,6 +1,15 @@
 import React from "react";
-import InfoPanel from "./InfoPanel";
 import PriceForm from "./Forms/PriceForm";
+import InfoPanel from "./InfoPanel.tsx";
+import type { Food, Location } from "../types/ModelTypes";
+
+type Props = {
+  sidePanelOpen: boolean;
+  setSidePanelOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  foods: Food[] | null;
+  selectedMarker: Location | null;
+  setSelectedMarker: React.Dispatch<React.SetStateAction<Location | null>>;
+};
 
 function SidePanel({
   sidePanelOpen,
@@ -8,7 +17,7 @@ function SidePanel({
   foods,
   selectedMarker,
   setSelectedMarker,
-}) {
+}: Props): JSX.Element {
   const closeSidePanel = () => {
     setSidePanelOpen(false);
     setSelectedMarker(null);

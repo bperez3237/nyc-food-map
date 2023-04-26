@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Map from "../components/Map";
 import "./Homepage.css";
-import SidePanel from "../components/SidePanel";
+import SidePanel from "../components/SidePanel.tsx";
 
 function HomePage({ map, setMap, locations, foods }) {
   const [selectedMarker, setSelectedMarker] = useState(null);

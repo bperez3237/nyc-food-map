@@ -4,7 +4,7 @@ import type { Food, Location } from "../../types/ModelTypes";
 
 type Props = {
   selectedMarker: Location;
-  setSelectedMarker: React.Dispatch<React.SetStateAction<Location>>;
+  setSelectedMarker: React.Dispatch<React.SetStateAction<Location | null>>;
   foods: Food[] | null;
 };
 
