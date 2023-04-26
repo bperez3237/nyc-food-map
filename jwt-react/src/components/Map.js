@@ -21,6 +21,8 @@ function Map({
     setMap(mapInstance);
   }, []);
 
+  const clickZoomLevel = 13;
+
   if (window.google) {
     locations.forEach((location) => {
       const marker = new window.google.maps.Marker({
@@ -43,12 +45,12 @@ function Map({
           setSelectedMarker(location);
           setSidePanelOpen(true);
           map.setCenter(marker.getPosition());
-          map.setZoom(14);
+          map.setZoom(clickZoomLevel);
         } else {
           setSelectedMarker(location);
           setSidePanelOpen(true);
           map.setCenter(marker.getPosition());
-          map.setZoom(14);
+          map.setZoom(clickZoomLevel);
         }
       });
     });
