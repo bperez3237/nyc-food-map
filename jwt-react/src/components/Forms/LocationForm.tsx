@@ -1,8 +1,16 @@
 ﻿import React, { useState } from "react";
+import type { Location } from "../../types/ModelTypes";
+import {} from "googlemaps";
+declare var google: any;
 
-function LocationForm({ locations, setLocations }) {
+type Props = {
+  locations: Location[] | null;
+  setLocations: React.Dispatch<React.SetStateAction<Location[] | null>>;
+};
+
+function LocationForm({ locations, setLocations }: Props): JSX.Element {
   console.log(locations);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState<string>("");
 
   const locationElements = locations
     ? locations.map((location) => {
@@ -17,10 +25,10 @@ function LocationForm({ locations, setLocations }) {
       })
     : [];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    function inNYC(address) {
+    function inNYC(address: google.maps.GeocoderAddressComponent[]) {
       return address.some((name) =>
         [
           "Kings County",
@@ -45,19 +53,24 @@ function LocationForm({ locations, setLocations }) {
         console.log("Address is not in NYC");
       } else {
         const lat =
-          (results[0].geometry.viewport.Va.lo +
-            results[0].geometry.viewport.Va.hi) /
+          (results[0].geometry.viewport.getSouthWest().lat() +
+            results[0].geometry.viewport.getNorthEast().lat()) /
           2;
         const lng =
-          (results[0].geometry.viewport.Ha.lo +
-            results[0].geometry.viewport.Ha.hi) /
+          (results[0].geometry.viewport.getSouthWest().lng() +
+            results[0].geometry.viewport.getNorthEast().lng()) /
           2;
         postData(e, results[0].formatted_address, lat, lng);
       }
     });
   };
 
-  const postData = async (e, formattedAddress, lat, lng) => {
+  const postData = async (
+    e: React.FormEvent<HTMLFormElement>,
+    formattedAddress: string,
+    lat: number,
+    lng: number
+  ) => {
     const response = await fetch("http://127.0.0.1:8000/locations/create/", {
       method: "POST",
       headers: {

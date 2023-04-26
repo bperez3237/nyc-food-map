@@ -15,6 +15,7 @@ type Location = {
   address: string;
   lat: number;
   lng: number;
+  entry_date: string;
   prices: Prices[];
 };
 

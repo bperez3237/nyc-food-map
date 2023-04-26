@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LocationForm from "../components/Forms/LocationForm";
+import LocationForm from "../components/Forms/LocationForm.tsx";
 import FoodForm from "../components/Forms/FoodForm.tsx";
 import PriceForm from "../components/Forms/PriceForm";
 

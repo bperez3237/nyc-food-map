@@ -31,14 +31,13 @@ function Searchbar({ map }) {
     geocoder.geocode({ address: searchQuery }, (results, status) => {
       if (status === "OK" && inNYC(results[0].address_components)) {
         // Get the latitude and longitude of the first result
-        console.log(results[0].geometry.viewport);
         const lat =
-          (results[0].geometry.viewport.Va.lo +
-            results[0].geometry.viewport.Va.hi) /
+          (results[0].geometry.viewport.getSouthWest().lat() +
+            results[0].geometry.viewport.getNorthEast().lat()) /
           2;
         const lng =
-          (results[0].geometry.viewport.Ha.lo +
-            results[0].geometry.viewport.Ha.hi) /
+          (results[0].geometry.viewport.getSouthWest().lng() +
+            results[0].geometry.viewport.getNorthEast().lng()) /
           2;
 
         // Create a new marker for the search result
