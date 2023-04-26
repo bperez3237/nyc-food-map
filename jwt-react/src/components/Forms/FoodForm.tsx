@@ -1,10 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
 
-type Food = {
-  id: number;
-  name: string;
-  emoji: string;
-};
+import type { Food } from "../../types/ModelTypes";
 
 type Props = {
   foods: Food[] | null;
