@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocationForm from "../components/Forms/LocationForm.tsx";
 import FoodForm from "../components/Forms/FoodForm.tsx";
-import PriceForm from "../components/Forms/PriceForm";
+import PriceForm from "../components/Forms/PriceForm.tsx";
 
 function CreatePage({ locations, setLocations, foods, setFoods }) {
   const [toggle, setToggle] = useState(false);

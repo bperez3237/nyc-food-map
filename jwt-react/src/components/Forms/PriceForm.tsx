@@ -1,11 +1,25 @@
 ﻿import React, { useState } from "react";
 import FoodSelect from "../FoodSelect";
+import type { Food, Location } from "../../types/ModelTypes";
 
-function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
-  const [selectedFoodId, setSelectedFoodId] = useState(foods[0].id);
+type Props = {
+  selectedMarker: Location;
+  setSelectedMarker: React.Dispatch<React.SetStateAction<Location>>;
+  foods: Food[] | null;
+};
+
+function PriceForm({
+  selectedMarker,
+  setSelectedMarker,
+  foods,
+}: Props): JSX.Element {
+  const [selectedFoodId, setSelectedFoodId] = useState<number | null>(
+    foods?.[0]?.id ?? null
+  );
+
   const [price, setPrice] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (price === 0) {
       console.log("price cannot be zero");
@@ -14,7 +28,7 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
     postData(e);
   };
 
-  const postData = async (e) => {
+  const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     if (isNaN(Number(price))) {
       console.log("not a number");
       return;
@@ -52,7 +66,7 @@ function PriceForm({ selectedMarker, setSelectedMarker, foods }) {
         <input
           type="number"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(parseFloat(e.target.value))}
         />
         <br />
         <label>Food:</label>

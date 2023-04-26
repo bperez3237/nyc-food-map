@@ -17,6 +17,7 @@ type Location = {
   lng: number;
   entry_date: string;
   prices: Prices[];
+  average_price: number;
 };
 
 export type { Food, Prices, Location };
