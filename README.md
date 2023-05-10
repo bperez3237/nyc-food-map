@@ -1,8 +1,8 @@
 # nyc-food-map
 
-Map of street food in nyc. In Progress....
+Map of street food in nyc.
 
-App will have map of common street food corners with lists of food available and average price. Goal is to show a heat map of prices of street food across the city. Map is restricted to search within NYC.
+App will have map of common street food corners with lists of food available and average price. Log the price of your food from a selection of street foods.
 
 ## React DRF SimpleJWT App
 
