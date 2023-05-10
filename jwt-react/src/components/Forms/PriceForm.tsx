@@ -1,6 +1,6 @@
 ﻿import React, { useState } from "react";
 import FoodSelect from "../FoodSelect";
-import type { Food, Location } from "../../types/ModelTypes";
+import { Food, Location } from "../../types/ModelTypes";
 
 type Props = {
   selectedMarker: Location;
