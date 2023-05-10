@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Map from "../components/Map";
+import Map from "../components/Map.tsx";
 import "./Homepage.css";
 import SidePanel from "../components/SidePanel.tsx";
 

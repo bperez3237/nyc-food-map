@@ -1,9 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
+import type { Location } from "../types/ModelTypes";
+
+type Props = {
+  map: google.maps.Map | null;
+  setMap: React.Dispatch<React.SetStateAction<google.maps.Map | null>>;
+  locations: Location[];
+  selectedMarker: Location | null;
+  setSelectedMarker: React.Dispatch<React.SetStateAction<Location | null>>;
+  setSidePanelOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const defaultMapOptions = {
   center: { lat: 40.7, lng: -73.9 },
   zoom: 11.7,
 };
+
 function Map({
   map,
   setMap,
@@ -11,11 +22,11 @@ function Map({
   selectedMarker,
   setSelectedMarker,
   setSidePanelOpen,
-}) {
-  const mapRef = useRef(null);
+}: Props): JSX.Element {
+  const mapRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const mapInstance = new window.google.maps.Map(
-      mapRef.current,
+      mapRef.current!,
       defaultMapOptions
     );
     setMap(mapInstance);
@@ -23,9 +34,9 @@ function Map({
 
   const clickZoomLevel = 13;
 
-  if (window.google) {
+  if (window.google && map && locations) {
     locations.forEach((location) => {
-      const marker = new window.google.maps.Marker({
+      const marker: google.maps.Marker = new window.google.maps.Marker({
         position: { lat: location.lat, lng: location.lng },
         map: map,
         title: location.address,
@@ -34,6 +45,9 @@ function Map({
       marker.addListener("click", () => {
         // Get information about the marker
 
+        if (!marker || marker === undefined) {
+          return;
+        }
         if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
           setSelectedMarker(null);
           setSidePanelOpen(false);
@@ -44,12 +58,12 @@ function Map({
         ) {
           setSelectedMarker(location);
           setSidePanelOpen(true);
-          map.setCenter(marker.getPosition());
+          // map.setCenter(marker.getPosition());
           map.setZoom(clickZoomLevel);
         } else {
           setSelectedMarker(location);
           setSidePanelOpen(true);
-          map.setCenter(marker.getPosition());
+          // map.setCenter(marker.getPosition());
           map.setZoom(clickZoomLevel);
         }
       });

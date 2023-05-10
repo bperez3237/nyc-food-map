@@ -14,7 +14,7 @@ function PriceForm({
   foods,
 }: Props): JSX.Element {
   const [selectedFoodId, setSelectedFoodId] = useState<number | null>(
-    foods?.[0]?.id ?? null
+    foods ? foods[0].id : null
   );
 
   const [price, setPrice] = useState(0);

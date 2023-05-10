@@ -1,6 +1,6 @@
 import React from "react";
 import PriceForm from "./Forms/PriceForm";
-import InfoPanel from "./InfoPanel.tsx";
+import InfoPanel from "./InfoPanel";
 import type { Food, Location } from "../types/ModelTypes";
 
 type Props = {
