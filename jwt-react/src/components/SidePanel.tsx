@@ -1,7 +1,7 @@
 import React from "react";
 import PriceForm from "./Forms/PriceForm";
 import InfoPanel from "./InfoPanel";
-import type { Food, Location } from "../types/ModelTypes";
+import { Food, Location } from "../types/ModelTypes";
 
 type Props = {
   sidePanelOpen: boolean;

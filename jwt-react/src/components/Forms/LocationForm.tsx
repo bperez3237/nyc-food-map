@@ -1,5 +1,5 @@
 ﻿import React, { useState } from "react";
-import type { Location } from "../../types/ModelTypes";
+import { Location } from "../../types/ModelTypes";
 declare var google: any;
 
 type Props = {

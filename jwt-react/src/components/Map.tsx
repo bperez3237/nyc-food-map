@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import type { Location } from "../types/ModelTypes";
+import { Location } from "../types/ModelTypes";
 
 type Props = {
   map: google.maps.Map | null;

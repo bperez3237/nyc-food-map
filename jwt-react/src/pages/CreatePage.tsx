@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocationForm from "../components/Forms/LocationForm";
 import FoodForm from "../components/Forms/FoodForm";
-import type { Food, Location } from "../types/ModelTypes";
+import { Food, Location } from "../types/ModelTypes";
 
 type Props = {
   locations: Location[] | null;

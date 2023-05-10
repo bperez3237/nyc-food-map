@@ -1,6 +1,17 @@
 import React, { useState } from "react";
+import { Food } from "../types/ModelTypes";
 
-function FoodSelect({ foods, selectedFoodId, setSelectedFoodId }) {
+type FoodSelectProps = {
+  foods: Food[];
+  selectedFoodId: string;
+  setSelectedFoodId: (id: string) => void;
+};
+
+function FoodSelect({
+  foods,
+  selectedFoodId,
+  setSelectedFoodId,
+}: FoodSelectProps) {
   const foodOptions = foods.map((food) => (
     <div
       className={`food-select-option${
@@ -8,8 +19,8 @@ function FoodSelect({ foods, selectedFoodId, setSelectedFoodId }) {
       }`}
       key={food.id}
       data-value={food.id}
-      onClick={(e) => {
-        setSelectedFoodId(e.target.dataset.value);
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        setSelectedFoodId(e.currentTarget.dataset.value!);
       }}
     >
       {`${food.name} - ${food.emoji}`}

@@ -1,6 +1,5 @@
 ﻿import React, { useState, useEffect } from "react";
-
-import type { Food } from "../../types/ModelTypes";
+import { Food } from "../../types/ModelTypes";
 
 type Props = {
   foods: Food[] | null;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import formatAddress from "../utils/format";
-import type { Location } from "../types/ModelTypes";
+import { Location } from "../types/ModelTypes";
 
 type Props = {
   selectedMarker: Location;
@@ -32,10 +32,10 @@ function InfoPanel({
       >
         <h2>{formatAddress(selectedMarker.address)}</h2>
       </div>
-      <p>{`(${selectedMarker.lat?.toFixed(2)},${selectedMarker.lng?.toFixed(
+      <p>{`(${selectedMarker.lat.toFixed(2)},${selectedMarker.lng.toFixed(
         2
       )})`}</p>
-      <p>Average Price: {data?.average_price.toFixed(2)}</p>
+      {data ? <p>Average Price: {data.average_price.toFixed(2)}</p> : null}
     </div>
   );
 }
