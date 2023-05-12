@@ -1,0 +1,8 @@
+services:
+  - name: server
+    buildCommand: docker build -t server-image server
+    startCommand: docker run -p 8000:8000 server-image
+
+  - name: frontend
+    buildCommand: docker build -t frontend-image jwt-react
+    startCommand: docker run -p 3000:3000 frontend-image
