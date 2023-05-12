@@ -35,7 +35,9 @@ function InfoPanel({
       <p>{`(${selectedMarker.lat.toFixed(2)},${selectedMarker.lng.toFixed(
         2
       )})`}</p>
-      {data ? <p>Average Price: {data.average_price.toFixed(2)}</p> : null}
+      {data?.average_price ? (
+        <p>Average Price: {data.average_price.toFixed(2)}</p>
+      ) : null}
     </div>
   );
 }
