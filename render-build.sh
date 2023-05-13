@@ -9,6 +9,7 @@ CI=false npm run build --prefix jwt-react
 cp -a jwt-react/build/. public/
 
 # builds the back end code
+cd server
 virtualenv venv && source venv/bin/activate
-pip install -r server/requirements.txt
+pip install -r requirements.txt
 python manage.py migrate
