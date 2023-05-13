@@ -45,9 +45,12 @@ function Map({
       marker.addListener("click", () => {
         // Get information about the marker
 
-        if (!marker || marker === undefined) {
+        if (!marker) {
           return;
         }
+
+        // const center = map.setCenter(marker.getPosition()!);
+
         if (JSON.stringify(selectedMarker) === JSON.stringify(location)) {
           setSelectedMarker(null);
           setSidePanelOpen(false);
@@ -58,12 +61,12 @@ function Map({
         ) {
           setSelectedMarker(location);
           setSidePanelOpen(true);
-          // map.setCenter(marker.getPosition());
+          map.setCenter(marker.getPosition()!);
           map.setZoom(clickZoomLevel);
         } else {
           setSelectedMarker(location);
           setSidePanelOpen(true);
-          // map.setCenter(marker.getPosition());
+          map.setCenter(marker.getPosition()!);
           map.setZoom(clickZoomLevel);
         }
       });

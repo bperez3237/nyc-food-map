@@ -8,7 +8,6 @@ type Props = {
 };
 
 function LocationForm({ locations, setLocations }: Props): JSX.Element {
-  console.log(locations);
   const [address, setAddress] = useState<string>("");
 
   const locationElements = locations
