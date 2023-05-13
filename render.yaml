@@ -8,7 +8,7 @@ services:
     name: server
     env: python
     buildCommand: "./render-build.sh"
-    startCommand: "gunicorn mysite.wsgi:application"
+    startCommand: "gunicorn server.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
