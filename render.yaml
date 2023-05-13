@@ -1,20 +1,20 @@
-databases:
-  - name: server
-    databaseName: server
-    user: server
-
+# Render YAML
 services:
-  - type: web
-    name: server
-    env: python
-    buildCommand: "./render-build.sh"
-    startCommand: "gunicorn server.wsgi:application"
+  - name: django-server
+    buildCommand: bash render-build.sh
+    env:
+      - key: DJANGO_SETTINGS_MODULE
+        value: "server.settings.production"
+    startCommand: python server/manage.py runserver 0.0.0.0:$PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: server
-          property: connectionString
+          name: my-postgres-db
+          property: connection_uri
       - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
+        fromFile: /var/secrets/my-secret-key
+    healthCheckPath: /admin/
+
+  - name: react-frontend
+    buildCommand: bash render-build.sh
+    startCommand: python -m http.server $PORT --directory public/
