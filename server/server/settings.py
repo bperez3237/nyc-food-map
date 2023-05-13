@@ -79,11 +79,17 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "foodmapdb",
         "HOST": "",
-        "USER": "brian",
-        "PASSWORD": "misty123",
         "PORT": "",
     }
 }
+
+if "DATABASE_URL" in os.environ:
+    import dj_database_url
+
+    DATABASES["default"] = dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 
 
 # Password validation
