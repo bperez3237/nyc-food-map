@@ -10,6 +10,6 @@ cp -a jwt-react/build/. public/
 
 # builds the back end code
 cd server
-virtualenv venv && source venv/bin/activate
+# virtualenv venv && source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
