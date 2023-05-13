@@ -43,6 +43,11 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
       return;
     }
     geocoder.geocode({ address: address }, (results, status) => {
+      if (!results) {
+        console.log("Geocoder did not return results");
+        return;
+      }
+
       if (status !== "OK") {
         console.log(
           "Geocode was not successful for the following reason:",

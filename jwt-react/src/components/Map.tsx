@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Location } from "../types/ModelTypes";
 
 type Props = {
-  map: google.maps.Map | null;
+  map: google.maps.Map;
   setMap: React.Dispatch<React.SetStateAction<google.maps.Map | null>>;
   locations: Location[];
   selectedMarker: Location | null;
