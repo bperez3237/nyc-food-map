@@ -4,7 +4,8 @@ set -o errexit
 
 # builds the front end code
 rm -rf public
-npm install --prefix jwt-react && npm run build --prefix jwt-react
+npm install --prefix jwt-react
+CI=false npm run build --prefix jwt-react
 cp -a jwt-react/build/. public/
 
 # builds the back end code
