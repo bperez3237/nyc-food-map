@@ -19,7 +19,7 @@ wsgi_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(wsgi_dir)
 
 # Set the Django settings module based on the wsgi.py location
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.server.settings")
 
 # Create the WSGI application
 application = get_wsgi_application()
