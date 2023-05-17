@@ -19,7 +19,7 @@ from django.core.wsgi import get_wsgi_application
 # sys.path.append(wsgi_dir)
 
 # Set the Django settings module based on the wsgi.py location
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.server.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.settings")
 
 # Create the WSGI application
 application = get_wsgi_application()
