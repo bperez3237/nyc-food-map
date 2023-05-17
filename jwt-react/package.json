@@ -50,6 +50,8 @@
     "axios": "^0.21.1",
     "googlemaps": "^0.1.5",
     "react-icons": "^4.7.1",
-    "typescript": "^3.2.1"
+    "typescript": "^3.2.1",
+    "webpack": "^4.19.0",
+    "webpack-cli": "^3.0.4"
   }
 }
