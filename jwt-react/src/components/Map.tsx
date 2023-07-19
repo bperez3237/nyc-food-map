@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Location } from "../types/ModelTypes";
 
 type Props = {
@@ -30,7 +30,7 @@ function Map({
       defaultMapOptions
     );
     setMap(mapInstance);
-  }, []);
+  }, [setMap]);
 
   const clickZoomLevel = 13;
 

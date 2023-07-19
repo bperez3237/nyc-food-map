@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="secret_key")
 DEBUG = "RENDER" not in os.environ
 
 # The last one is my private IP address for Android development
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.0.12", "nyc-food-map.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.0.12"]
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
