@@ -38,7 +38,10 @@ class LocationCreateView(CreateView):
             lng=data["lng"],
         )
         location.save()
-        return JsonResponse({"success": True})
+        return JsonResponse(
+            {"address": location.address, "lat": location.lat, "lng": location.lng},
+            status=201,
+        )
 
 
 class LocationIndexView(ListView):

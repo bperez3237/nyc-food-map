@@ -3,8 +3,8 @@ import { Location } from "../../types/ModelTypes";
 declare var google: any;
 
 type Props = {
-  locations: Location[] | null;
-  setLocations: React.Dispatch<React.SetStateAction<Location[] | null>>;
+  locations: Location[];
+  setLocations: React.Dispatch<React.SetStateAction<Location[]>>;
 };
 
 function LocationForm({ locations, setLocations }: Props): JSX.Element {
@@ -87,7 +87,7 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    setLocations([...locations, data]);
     setAddress("");
   };
 

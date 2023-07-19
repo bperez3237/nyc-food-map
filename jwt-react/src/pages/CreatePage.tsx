@@ -4,8 +4,8 @@ import FoodForm from "../components/Forms/FoodForm";
 import { Food, Location } from "../types/ModelTypes";
 
 type Props = {
-  locations: Location[] | null;
-  setLocations: React.Dispatch<React.SetStateAction<Location[] | null>>;
+  locations: Location[];
+  setLocations: React.Dispatch<React.SetStateAction<Location[]>>;
   foods: Food[];
   setFoods: React.Dispatch<React.SetStateAction<Food[]>>;
 };
