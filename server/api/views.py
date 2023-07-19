@@ -20,20 +20,25 @@ class LocationIndexView(ListView):
 
     def get(self, request, *args, **kwargs):
         locations = list(self.get_queryset().values())
-        return JsonResponse({'locations': locations})
+        return JsonResponse({"locations": locations})
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name="dispatch")
 class LocationCreateView(CreateView):
     model = Location
-    fields = ['address', 'entry_date', 'lat', 'lng']
-    success_url = reverse_lazy('location:index')
+    fields = ["address", "entry_date", "lat", "lng"]
+    success_url = reverse_lazy("location:index")
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        location = Location(address=data['address'], entry_date=data['entry_date'], lat=data['lat'], lng=data['lng'])
+        location = Location(
+            address=data["address"],
+            entry_date=data["entry_date"],
+            lat=data["lat"],
+            lng=data["lng"],
+        )
         location.save()
-        return JsonResponse({'success': True})
+        return JsonResponse({"success": True})
 
 
 class LocationIndexView(ListView):
@@ -44,18 +49,22 @@ class LocationIndexView(ListView):
         for location in self.get_queryset():
             location.calculate_average_price()
             location_data = {
-                'id': location.id,
-                'lat': location.lat,
-                'lng': location.lng,
-                'address': location.address,
-                'average_price': location.average_price,
-                'prices': [
-                    {'food': price.food.name, 'value': price.value, 'location': location.address }
+                "id": location.id,
+                "lat": location.lat,
+                "lng": location.lng,
+                "address": location.address,
+                "average_price": location.average_price,
+                "prices": [
+                    {
+                        "food": price.food.name,
+                        "value": price.value,
+                        "location": location.address,
+                    }
                     for price in location.prices.all()
                 ],
             }
             locations.append(location_data)
-        return JsonResponse({'locations': locations})
+        return JsonResponse({"locations": locations})
 
 
 class LocationShowView(DetailView):
@@ -65,31 +74,37 @@ class LocationShowView(DetailView):
         location = self.get_object()
         location.calculate_average_price()
         location_data = {
-            'id': location.id,
-            'lat': location.lat,
-            'lng': location.lng,
-            'address': location.address,
-            'average_price': location.average_price,
-            'prices': [
-                    {'food': price.food.name, 'value': price.value, 'location': location.address }
+            "id": location.id,
+            "lat": location.lat,
+            "lng": location.lng,
+            "address": location.address,
+            "average_price": location.average_price,
+            "prices": [
+                {
+                    "food": price.food.name,
+                    "value": price.value,
+                    "location": location.address,
+                }
                 for price in location.prices.all()
             ],
         }
-        return JsonResponse({'location': location_data})
+        return JsonResponse({"location": location_data})
 
 
 class LocationUpdateView(UpdateView):
     model = Location
-    fields = ['address', 'entry_date']
+    fields = ["address", "entry_date"]
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.calculate_average_price() # update the average price of related foods
-        return JsonResponse({'location': serializers.serialize('json', [self.object])})
+        self.object.calculate_average_price()  # update the average price of related foods
+        return JsonResponse({"location": serializers.serialize("json", [self.object])})
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
-        obj.average_price = obj.foods.aggregate(models.Avg('prices__value'))['prices__value__avg']
+        obj.average_price = obj.foods.aggregate(models.Avg("prices__value"))[
+            "prices__value__avg"
+        ]
         return obj
 
 
@@ -98,7 +113,7 @@ class PriceIndexView(ListView):
 
     def get(self, request, *args, **kwargs):
         prices = list(self.get_queryset().values())
-        return JsonResponse({'prices': prices})
+        return JsonResponse({"prices": prices})
 
 
 class PriceShowView(DetailView):
@@ -106,24 +121,26 @@ class PriceShowView(DetailView):
 
     def get(self, request, *args, **kwargs):
         price = self.get_object()
-        price_data = serializers.serialize('json', [price])
-        return JsonResponse({'price': price_data})
+        price_data = serializers.serialize("json", [price])
+        return JsonResponse({"price": price_data})
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name="dispatch")
 class PriceCreateView(CreateView):
     model = Price
-    fields = ['value', 'location', 'food']
-    success_url = reverse_lazy('price:index')
+    fields = ["value", "location", "food"]
+    success_url = reverse_lazy("price:index")
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        location = Location.objects.get(pk=data['location'])
-        food = Food.objects.get(pk=data['food'])
-        price = Price(value=data['value'], location=location, food=food)
+        location = Location.objects.get(pk=data["location"])
+        food = Food.objects.get(pk=data["food"])
+        price = Price(value=data["value"], location=location, food=food)
         price.save()
-        return JsonResponse({'value': price.value, 'food': food.name, 'location': location.address}, status=201)
-
+        return JsonResponse(
+            {"value": price.value, "food": food.name, "location": location.address},
+            status=201,
+        )
 
 
 class FoodIndexView(ListView):
@@ -131,7 +148,7 @@ class FoodIndexView(ListView):
 
     def get(self, request, *args, **kwargs):
         foods = list(self.get_queryset().values())
-        return JsonResponse({'foods': foods})
+        return JsonResponse({"foods": foods})
 
 
 class FoodShowView(DetailView):
@@ -140,18 +157,18 @@ class FoodShowView(DetailView):
     def get(self, request, *args, **kwargs):
         food = self.get_object()
         food.calculate_average_price()
-        food_data = serializers.serialize('json', [food])
-        return JsonResponse({'food': food_data})
+        food_data = serializers.serialize("json", [food])
+        return JsonResponse({"food": food_data})
 
-@method_decorator(csrf_exempt, name='dispatch')
+
+@method_decorator(csrf_exempt, name="dispatch")
 class FoodCreateView(CreateView):
     model = Food
-    fields = ['name', 'emoji']
-    success_url = reverse_lazy('food:index')
+    fields = ["name", "emoji"]
+    success_url = reverse_lazy("food:index")
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        food = Food(name=data['name'], emoji=data['emoji'])
+        food = Food(name=data["name"], emoji=data["emoji"])
         food.save()
-        return JsonResponse({'success': True})
-
+        return JsonResponse({"name": food.name, "emoji": food.emoji}, status=201)

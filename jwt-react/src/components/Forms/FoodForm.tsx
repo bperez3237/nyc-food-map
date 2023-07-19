@@ -1,24 +1,14 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState } from "react";
 import { Food } from "../../types/ModelTypes";
 
 type Props = {
-  foods: Food[] | null;
-  setFoods: React.Dispatch<React.SetStateAction<Food[] | null>>;
+  foods: Food[];
+  setFoods: React.Dispatch<React.SetStateAction<Food[]>>;
 };
 
 function FoodForm({ foods, setFoods }: Props): JSX.Element {
   const [name, setName] = useState<string>("");
   const [emojiCode, setEmojiCode] = useState<string>("");
-
-  const foodElements: JSX.Element[] = foods
-    ? foods.map((food) => {
-        return (
-          <div key={food.id}>
-            <h3>{food.name}</h3>
-          </div>
-        );
-      })
-    : [];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +32,7 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    setFoods([...foods, data]);
     setName("");
     setEmojiCode("");
   };
@@ -60,7 +50,6 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
         />
         <button type="submit">Submit</button>
       </form>
-      {foodElements}
     </div>
   );
 }

@@ -15,7 +15,6 @@ function FoodSelect({
   if (foods === null) {
     return <div className="food-select">Loading...</div>; // or any other UI representation for the null case
   }
-
   const foodOptions = foods.map((food) => (
     <div
       className={`food-select-option${

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LocationForm from "../components/Forms/LocationForm";
 import FoodForm from "../components/Forms/FoodForm";
 import { Food, Location } from "../types/ModelTypes";
@@ -6,8 +6,8 @@ import { Food, Location } from "../types/ModelTypes";
 type Props = {
   locations: Location[] | null;
   setLocations: React.Dispatch<React.SetStateAction<Location[] | null>>;
-  foods: Food[] | null;
-  setFoods: React.Dispatch<React.SetStateAction<Food[] | null>>;
+  foods: Food[];
+  setFoods: React.Dispatch<React.SetStateAction<Food[]>>;
 };
 
 function CreatePage({

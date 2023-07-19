@@ -45,6 +45,8 @@ function App() {
             map={map}
             locations={locations}
             setLocations={setLocations}
+            foods={foods}
+            setFoods={setFoods}
           />
         </Route>
       </Switch>
