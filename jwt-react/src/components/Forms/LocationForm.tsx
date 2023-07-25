@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import { Location } from "../../types/ModelTypes";
+import "./style.css";
 declare var google: any;
 
 type Props = {
@@ -92,14 +93,18 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
   };
 
   return (
-    <div>
-      <h1>Create Location</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Address:</label>
-        <input value={address} onChange={(e) => setAddress(e.target.value)} />
+    <div className="form">
+      <h1 className="form-title">Create Location</h1>
+      <form className="form-group" onSubmit={handleSubmit}>
+        <label className="label">Address:</label>
+        <input
+          className="input"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
         <button type="submit">Submit</button>
       </form>
-      {locationElements}
+      <div className="element-group">{locationElements}</div>
     </div>
   );
 }
