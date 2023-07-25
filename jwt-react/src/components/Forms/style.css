@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-title {
+  /* font-size: 1.5rem; */
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.form-body {
+  display: grid;
+}
+
+.form-body button {
+  margin-top: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.element-group {
+  margin-top: 30px;
+  display: grid;
+  min-width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+  /* Define the number of rows you want */
+  grid-template-rows: repeat(
+    3,
+    100px
+  ); /* You can adjust "3" to the desired number of rows */
+}

@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import { Food } from "../../types/ModelTypes";
+import "./style.css";
 
 type Props = {
   foods: Food[];
@@ -20,6 +21,17 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
     postData(e);
   };
 
+  const foodElements = foods
+    ? foods.map((food) => {
+        return (
+          <div key={food.id}>
+            <h3>{food.name}</h3>
+            <p>{food.emoji}</p>
+          </div>
+        );
+      })
+    : [];
+
   const postData = async (e: React.FormEvent<HTMLFormElement>) => {
     const response = await fetch("http://127.0.0.1:8000/foods/create/", {
       method: "POST",
@@ -38,18 +50,24 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
   };
 
   return (
-    <div>
-      <h1>Create Food</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-        <label>Emoji</label>
+    <div className="form">
+      <h1 className="form-title">Create Food</h1>
+      <form className="form-body" onSubmit={handleSubmit}>
+        <label className="label">Name</label>
         <input
+          className="input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label className="label">Emoji</label>
+        <input
+          className="input"
           value={emojiCode}
           onChange={(e) => setEmojiCode(e.target.value)}
         />
         <button type="submit">Submit</button>
       </form>
+      <div className="element-group">{foodElements}</div>
     </div>
   );
 }
