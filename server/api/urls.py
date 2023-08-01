@@ -14,25 +14,38 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import (LocationIndexView, LocationShowView, LocationCreateView, LocationUpdateView,
-    PriceIndexView, PriceShowView, PriceCreateView,
-    FoodIndexView, FoodShowView, FoodCreateView)
+from .views import (
+    LocationIndexView,
+    LocationShowView,
+    LocationCreateView,
+    LocationUpdateView,
+    PriceIndexView,
+    PriceShowView,
+    PriceCreateView,
+    FoodIndexView,
+    FoodShowView,
+    FoodCreateView,
+    FoodDeleteView,
+)
 
 
 urlpatterns = [
     # Location URLs
-    path('locations/', LocationIndexView.as_view(), name='location_index'),
-    path('locations/<int:pk>/', LocationShowView.as_view(), name='location_show'),
-    path('locations/create/', LocationCreateView.as_view(), name='location_create'),
-    path('locations/<int:pk>/update/', LocationUpdateView.as_view(), name='location_update'),
+    path("locations/", LocationIndexView.as_view(), name="location_index"),
+    path("locations/<int:pk>/", LocationShowView.as_view(), name="location_show"),
+    path("locations/create/", LocationCreateView.as_view(), name="location_create"),
+    path(
+        "locations/<int:pk>/update/",
+        LocationUpdateView.as_view(),
+        name="location_update",
+    ),
     # Price URLs
-    path('prices/', PriceIndexView.as_view(), name='price_index'),
-    path('prices/create/', PriceCreateView.as_view(), name='price_create'),
-    path('prices/<int:pk>/', PriceShowView.as_view(), name='price_show'),
-    
+    path("prices/", PriceIndexView.as_view(), name="price_index"),
+    path("prices/create/", PriceCreateView.as_view(), name="price_create"),
+    path("prices/<int:pk>/", PriceShowView.as_view(), name="price_show"),
     # Food URLs
-    path('foods/', FoodIndexView.as_view(), name='food_index'),
-    path('foods/create/', FoodCreateView.as_view(), name='food_create'),
-    path('foods/<int:pk>/', FoodShowView.as_view(), name='food_show'),
+    path("foods/", FoodIndexView.as_view(), name="food_index"),
+    path("foods/create/", FoodCreateView.as_view(), name="food_create"),
+    path("foods/<int:pk>/", FoodShowView.as_view(), name="food_show"),
+    path("foods/<int:pk>/delete/", FoodDeleteView.as_view(), name="food_delete"),
 ]
-

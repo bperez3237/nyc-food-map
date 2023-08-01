@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 # Create your views here.
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db import models
 from .models import Location, Price, Food
@@ -175,3 +175,14 @@ class FoodCreateView(CreateView):
         food = Food(name=data["name"], emoji=data["emoji"])
         food.save()
         return JsonResponse({"name": food.name, "emoji": food.emoji}, status=201)
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class FoodDeleteView(DeleteView):
+    model = Food
+    success_url = reverse_lazy("food:index")
+
+    def delete(self, request, *args, **kwargs):
+        food = self.get_object()
+        food.delete()
+        return JsonResponse({"message": "Food deleted"}, status=204)
