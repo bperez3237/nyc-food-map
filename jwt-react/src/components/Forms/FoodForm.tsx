@@ -21,12 +21,24 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
     postData(e);
   };
 
+  const handleDelete = async (id: number) => {
+    const response = await fetch(`http://127.0.0.1:8000/foods/${id}/delete/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setFoods(foods.filter((food) => food.id !== id));
+  };
+
   const foodElements = foods
     ? foods.map((food) => {
         return (
           <div key={food.id}>
             <h3>{food.name}</h3>
             <p>{food.emoji}</p>
+            <button onClick={() => handleDelete(food.id)}>Delete</button>
           </div>
         );
       })

@@ -185,4 +185,4 @@ class FoodDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         food = self.get_object()
         food.delete()
-        return JsonResponse({"message": "Food deleted"}, status=204)
+        return JsonResponse({"message": "Food deleted"}, status=200)
