@@ -16,9 +16,7 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
         return (
           <div key={location.id}>
             <h3>{location.address}</h3>
-            <p>{location.entry_date}</p>
-            <p>{location.lat}</p>
-            <p>{location.lng}</p>
+            <p>{`(${location.lat.toFixed(4)},${location.lng.toFixed(4)})`}</p>
           </div>
         );
       })
@@ -95,7 +93,7 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
   return (
     <div className="form">
       <h1 className="form-title">Create Location</h1>
-      <form className="form-group" onSubmit={handleSubmit}>
+      <form className="form-body" onSubmit={handleSubmit}>
         <label className="label">Address:</label>
         <input
           className="input"
