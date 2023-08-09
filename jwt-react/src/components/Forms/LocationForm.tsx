@@ -17,7 +17,12 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
           <div key={location.id}>
             <h3>{location.address}</h3>
             <p>{`(${location.lat.toFixed(4)},${location.lng.toFixed(4)})`}</p>
-            <button onClick={() => handleDelete(location.id)}>Delete</button>
+            <button
+              className="styled-button"
+              onClick={() => handleDelete(location.id)}
+            >
+              Delete
+            </button>
           </div>
         );
       })
@@ -115,7 +120,9 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button className="styled-button" type="submit">
+          Submit
+        </button>
       </form>
 
       <div className="element-group">{locationElements}</div>

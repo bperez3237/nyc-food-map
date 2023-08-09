@@ -76,7 +76,9 @@ function PriceForm({
           setSelectedFoodId={setSelectedFoodId}
         />
         <br />
-        <button type="submit">Submit</button>
+        <button className="styled-button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -38,7 +38,12 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
           <div key={food.id}>
             <h3>{food.name}</h3>
             <p>{food.emoji}</p>
-            <button onClick={() => handleDelete(food.id)}>Delete</button>
+            <button
+              className="styled-button"
+              onClick={() => handleDelete(food.id)}
+            >
+              Delete
+            </button>
           </div>
         );
       })
@@ -77,7 +82,9 @@ function FoodForm({ foods, setFoods }: Props): JSX.Element {
           value={emojiCode}
           onChange={(e) => setEmojiCode(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button className="styled-button" type="submit">
+          Submit
+        </button>
       </form>
       <div className="element-group">{foodElements}</div>
     </div>

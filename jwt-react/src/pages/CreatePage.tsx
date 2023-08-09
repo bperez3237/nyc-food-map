@@ -20,7 +20,9 @@ function CreatePage({
 
   return (
     <div>
-      <button onClick={() => setToggle(!toggle)}>toggle form</button>
+      <button className="styled-button" onClick={() => setToggle(!toggle)}>
+        toggle form
+      </button>
       {toggle ? (
         <LocationForm locations={locations} setLocations={setLocations} />
       ) : (
