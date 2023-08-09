@@ -111,6 +111,17 @@ class LocationUpdateView(UpdateView):
         return obj
 
 
+@method_decorator(csrf_exempt, name="dispatch")
+class LocationDeleteView(DeleteView):
+    model = Location
+    success_url = reverse_lazy("location:index")
+
+    def delete(self, request, *args, **kwargs):
+        location = self.get_object()
+        location.delete()
+        return JsonResponse({"message": "Location deleted"}, status=200)
+
+
 class PriceIndexView(ListView):
     model = Price
 

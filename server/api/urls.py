@@ -19,6 +19,7 @@ from .views import (
     LocationShowView,
     LocationCreateView,
     LocationUpdateView,
+    LocationDeleteView,
     PriceIndexView,
     PriceShowView,
     PriceCreateView,
@@ -38,6 +39,11 @@ urlpatterns = [
         "locations/<int:pk>/update/",
         LocationUpdateView.as_view(),
         name="location_update",
+    ),
+    path(
+        "locations/<int:pk>/delete/",
+        LocationDeleteView.as_view(),
+        name="location_delete",
     ),
     # Price URLs
     path("prices/", PriceIndexView.as_view(), name="price_index"),

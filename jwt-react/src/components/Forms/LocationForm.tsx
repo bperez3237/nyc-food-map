@@ -17,6 +17,7 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
           <div key={location.id}>
             <h3>{location.address}</h3>
             <p>{`(${location.lat.toFixed(4)},${location.lng.toFixed(4)})`}</p>
+            <button onClick={() => handleDelete(location.id)}>Delete</button>
           </div>
         );
       })
@@ -67,6 +68,20 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
     });
   };
 
+  const handleDelete = async (id: number) => {
+    const response = await fetch(
+      `http://127.0.0.1:8000/locations/${id}/delete/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setLocations(locations.filter((location) => location.id !== id));
+  };
+
   const postData = async (
     e: React.FormEvent<HTMLFormElement>,
     formattedAddress: string,
@@ -102,6 +117,7 @@ function LocationForm({ locations, setLocations }: Props): JSX.Element {
         />
         <button type="submit">Submit</button>
       </form>
+
       <div className="element-group">{locationElements}</div>
     </div>
   );
